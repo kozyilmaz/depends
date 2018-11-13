@@ -6,32 +6,32 @@ endif
 subdir-y += \
 	tools
 
-subdir-${DEPENDS_ENABLE_OPENSSL} = \
+subdir-${DEPENDS_ENABLE_OPENSSL} += \
 	openssl
 
-subdir-${DEPENDS_ENABLE_CURL} = \
+subdir-${DEPENDS_ENABLE_CURL} += \
 	curl
 
 curl_depends-y = \
 	openssl
 
-subdir-${DEPENDS_ENABLE_LIBEVENT} = \
+subdir-${DEPENDS_ENABLE_LIBEVENT} += \
 	libevent
 
 libevent_depends-y = \
 	openssl
 
-subdir-${DEPENDS_ENABLE_LIBEVHTP} = \
+subdir-${DEPENDS_ENABLE_LIBEVHTP} += \
 	libevhtp
 
 libevhtp_depends-y = \
 	openssl \
 	libevent
 
-subdir-${DEPENDS_ENABLE_UNIVALUE} = \
+subdir-${DEPENDS_ENABLE_UNIVALUE} += \
 	univalue
 
-subdir-${DEPENDS_ENABLE_BITCOIN} = \
+subdir-${DEPENDS_ENABLE_BITCOIN} += \
 	boost \
 	bitcoin
 
