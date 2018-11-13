@@ -1,0 +1,30 @@
+#!/bin/sh
+
+BSPJOB=4
+BSPROOT=$(cd $(dirname "${BASH_SOURCE[0]}") >/dev/null && pwd)
+# platform
+BSPCC=gcc
+BSPCXX=g++
+BSPHOST=
+BSPCFLAGS=
+BSPLDFLAGS=
+#BSPCFLAGS=" -fsanitize=thread -fPIC -pie "
+#BSPLDFLAGS=" -fsanitize=thread -fPIC -pie "
+BSPEXTRAFLAGS=
+# tools and output
+BSPTOOLS=${BSPROOT}/tools/o
+BSPROOTFS=${BSPROOT}/rootfs/x86_64
+PATH=${BSPTOOLS}/bin:${PATH}
+
+export BSPJOB BSPROOT BSPCC BSPCXX BSPHOST BSPCFLAGS BSPLDFLAGS BSPEXTRAFLAGS BSPTOOLS BSPROOTFS PATH
+
+# tool selection
+export TOOLS_ENABLE_CMAKE=y
+
+# depends selection
+export DEPENDS_ENABLE_OPENSSL=y
+export DEPENDS_ENABLE_CURL=y
+export DEPENDS_ENABLE_LIBEVENT=y
+export DEPENDS_ENABLE_LIBEVHTP=y
+export DEPENDS_ENABLE_UNIVALUE=y
+export DEPENDS_ENABLE_BITCOIN=y
