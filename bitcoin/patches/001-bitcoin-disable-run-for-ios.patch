@@ -1,0 +1,18 @@
+diff --git a/src/util.cpp b/src/util.cpp
+index a391c5e..3e6390a 100644
+--- a/src/util.cpp
++++ b/src/util.cpp
+@@ -1150,9 +1150,13 @@ fs::path GetSpecialFolderPath(int nFolder, bool fCreate)
+ void runCommand(const std::string& strCommand)
+ {
+     if (strCommand.empty()) return;
++#if !defined (APPLE_TARGET_IOS)
+     int nErr = ::system(strCommand.c_str());
+     if (nErr)
+         LogPrintf("runCommand error: system(%s) returned %d\n", strCommand, nErr);
++#else
++    LogPrintf("runCommand error: system(%s) can not be run on iOS-variants\n", strCommand);
++#endif
+ }
+ 
+ void RenameThread(const char* name)
