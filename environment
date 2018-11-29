@@ -1,24 +1,71 @@
 #!/bin/sh
 
+# usage: source environment [optional: ios64, iossim]
+ARG=$1
+
+if [[ -z "$ARG" ]]; then
+    echo "setting compiler for desktop platforms";
+elif [ "ios64" == "$ARG" ]; then
+    echo "setting compiler for Apple iOS (only 64bit)";
+elif [ "iossim" == "$ARG" ]; then
+    echo "setting compiler for Apple iOS Simulator";
+else
+    echo "no suitable platform found!"
+    return 1
+fi
+
+
+# common
 BSPJOB=4
 BSPROOT=$(cd $(dirname "${BASH_SOURCE[0]}") >/dev/null && pwd)
+
 # platform
-BSPCC=gcc
-BSPCXX=g++
-BSPHOST=
-BSPCFLAGS=
-BSPLDFLAGS=
-#BSPCFLAGS=" -fsanitize=thread -fPIC -pie "
-#BSPLDFLAGS=" -fsanitize=thread -fPIC -pie "
+if [[ -z "$ARG" ]]; then
+    BSPCC=gcc
+    BSPCXX=g++
+    BSPHOST=
+    BSPCFLAGS=
+    BSPLDFLAGS=
+    BSPPLATFORM=x86_64
+elif [ "ios64" == "$ARG" ]; then
+    BSPCC=$(xcrun --sdk iphoneos -f clang)
+    BSPCXX=$(xcrun --sdk iphoneos -f clang++)
+    BSPHOST="--host=aarch64-apple-darwin"
+    BSPCFLAGS="-arch arm64 -miphoneos-version-min=11.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -fno-common"
+    BSPLDFLAGS=
+    BSPPLATFORM=ios64
+elif [ "iossim" == "$ARG" ]; then
+    BSPCC=$(xcrun --sdk iphonesimulator -f clang)
+    BSPCXX=$(xcrun --sdk iphonesimulator -f clang++)
+    BSPHOST="--host=x86_64-apple-darwin"
+    BSPCFLAGS="-arch x86_64 -miphoneos-version-min=11.0 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path) -fno-common"
+    BSPLDFLAGS=
+    BSPPLATFORM=iossim
+fi
+
+# debugging & profiling
 BSPEXTRAFLAGS=
+
 # tools and output
 BSPTOOLS=${BSPROOT}/tools/o
-BSPROOTFS=${BSPROOT}/build/x86_64
+BSPROOTFS=${BSPROOT}/build/$(BSPPLATFORM)
 PATH=${BSPTOOLS}/bin:${PATH}
 
-export BSPJOB BSPROOT BSPCC BSPCXX BSPHOST BSPCFLAGS BSPLDFLAGS BSPEXTRAFLAGS BSPTOOLS BSPROOTFS PATH
+export BSPJOB BSPROOT BSPCC BSPCXX BSPHOST BSPCFLAGS BSPLDFLAGS BSPPLATFORM BSPEXTRAFLAGS BSPTOOLS BSPROOTFS PATH
 
-# tool selection
+
+# export var for Makefile.build and other Makefile's
+if [[ -z "$PLATFORM" ]]; then
+    echo "export no TARGET_QUERY, autodetect!";
+elif [ "ios64" == "$PLATFORM" ]; then
+    echo "export TARGET_QUERY=ios64";
+    export TARGET_QUERY=ios64
+elif [ "iossim" == "$PLATFORM" ]; then
+    echo "export TARGET_QUERY=iossim";
+    export TARGET_QUERY=iossim
+fi
+
+# tools selection
 export TOOLS_ENABLE_CMAKE=y
 
 # depends selection
