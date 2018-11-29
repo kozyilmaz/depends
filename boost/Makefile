@@ -24,10 +24,13 @@ boost_clone:
 	if [ ! -d "boost_$(BOOST_VERSION)" ]; then tar xvf boost_$(BOOST_VERSION).tar.bz2; fi
 
 boost_config:
-	if [ ! -f boost_$(BOOST_VERSION)/tools/build/src/user-config.jam ]; then \
-		echo "using $(BOOST_TOOLSET) : custom : ${BSPCXX} ${BSPCFLAGS} ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
+	if [ -f "boost_$(BOOST_VERSION)/tools/build/src/user-config.jam" ]; then \
+		rm -rf boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
 	fi
-	( cd boost_$(BOOST_VERSION); ./bootstrap.sh --prefix=${BSPROOTFS} --without-icu --with-libraries=chrono,filesystem,program_options,system,thread,test )
+	echo "using $(BOOST_TOOLSET) : custom : ${BSPCXX} ${BSPCFLAGS} ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
+	( cd boost_$(BOOST_VERSION); \
+		./bootstrap.sh --prefix=${BSPROOTFS} --without-icu --with-libraries=chrono,filesystem,program_options,system,thread,test \
+	)
 
 boost_build:
 	( cd boost_$(BOOST_VERSION); \
@@ -46,6 +49,9 @@ boost_uninstall:
 
 boost_clean:
 	if [ -f "boost_$(BOOST_VERSION)/Makefile" ]; then make -C boost_$(BOOST_VERSION) distclean; fi
+	if [ -f "boost_$(BOOST_VERSION)/tools/build/src/user-config.jam" ]; then \
+		rm -rf boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
+	fi
 
 boost_distclean:
 	rm -rf boost_$(BOOST_VERSION)
