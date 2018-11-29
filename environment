@@ -48,19 +48,19 @@ BSPEXTRAFLAGS=
 
 # tools and output
 BSPTOOLS=${BSPROOT}/tools/o
-BSPROOTFS=${BSPROOT}/build/$(BSPPLATFORM)
+BSPROOTFS=${BSPROOT}/build/${BSPPLATFORM}
 PATH=${BSPTOOLS}/bin:${PATH}
 
 export BSPJOB BSPROOT BSPCC BSPCXX BSPHOST BSPCFLAGS BSPLDFLAGS BSPPLATFORM BSPEXTRAFLAGS BSPTOOLS BSPROOTFS PATH
 
 
 # export var for Makefile.build and other Makefile's
-if [[ -z "$PLATFORM" ]]; then
+if [[ -z "$ARG" ]]; then
     echo "export no TARGET_QUERY, autodetect!";
-elif [ "ios64" == "$PLATFORM" ]; then
+elif [ "ios64" == "$ARG" ]; then
     echo "export TARGET_QUERY=ios64";
     export TARGET_QUERY=ios64
-elif [ "iossim" == "$PLATFORM" ]; then
+elif [ "iossim" == "$ARG" ]; then
     echo "export TARGET_QUERY=iossim";
     export TARGET_QUERY=iossim
 fi
