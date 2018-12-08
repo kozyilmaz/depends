@@ -3,7 +3,7 @@ target_name ?= bitcoin
 
 include ../Makefile.build
 
-BITCOIN_VERSION=0.17.0
+BITCOIN_VERSION=0.17.0.1
 
 bitcoin_clone:
 	if [ ! -f "bitcoin-$(BITCOIN_VERSION).tar.gz" ]; then curl -L https://github.com/bitcoin/bitcoin/archive/v$(BITCOIN_VERSION).tar.gz -o bitcoin-$(BITCOIN_VERSION).tar.gz; fi
