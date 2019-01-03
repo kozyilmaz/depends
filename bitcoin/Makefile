@@ -101,6 +101,7 @@ bitcoin_install:
 	cp bitcoin-$(BITCOIN_VERSION)/src/chainparams.h ${BSPROOTFS}/include/bitcoin
 	cp bitcoin-$(BITCOIN_VERSION)/src/base58.h ${BSPROOTFS}/include/bitcoin
 	cp bitcoin-$(BITCOIN_VERSION)/src/core_io.h ${BSPROOTFS}/include/bitcoin
+	cp bitcoin-$(BITCOIN_VERSION)/src/utilstrencodings.h ${BSPROOTFS}/include/bitcoin
 
 bitcoin_uninstall:
 	if [ -f "${BSPROOTFS}/bin/bitcoind" ]; then rm -rf ${BSPROOTFS}/bin/bitcoind; fi
