@@ -3,16 +3,15 @@ target_name ?= bitcoin
 
 include ../Makefile.build
 
-BITCOIN_VERSION=0.17.0.1
+BITCOIN_VERSION=0.17.1
 
 bitcoin_clone:
-	if [ ! -f "bitcoin-$(BITCOIN_VERSION).tar.gz" ]; then curl -L https://github.com/bitcoin/bitcoin/archive/v$(BITCOIN_VERSION).tar.gz -o bitcoin-$(BITCOIN_VERSION).tar.gz; fi
+	if [ ! -f "bitcoin-$(BITCOIN_VERSION).tar.gz" ]; then curl -OL https://bitcoincore.org/bin/bitcoin-core-$(BITCOIN_VERSION)/bitcoin-$(BITCOIN_VERSION).tar.gz; fi
 	if [ ! -d "bitcoin-$(BITCOIN_VERSION)" ]; then tar xvf bitcoin-$(BITCOIN_VERSION).tar.gz; fi
 
 bitcoin_config:
 	$(call patchme,bitcoin-$(BITCOIN_VERSION))
-	if [ ! -f "bitcoin-$(BITCOIN_VERSION)/configure" ]; then (cd bitcoin-$(BITCOIN_VERSION) && ./autogen.sh); fi
-	( cd bitcoin-$(BITCOIN_VERSION); \
+	( cd bitcoin-$(BITCOIN_VERSION) && ./autogen.sh; \
 		CC=${BSPCC} \
 		CXX=${BSPCXX} \
 		CFLAGS="${BSPCFLAGS} ${BSPEXTRAFLAGS} -I${BSPROOTFS}/include" \
