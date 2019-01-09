@@ -23,6 +23,7 @@ liboqs_build:
 		PKG_CONFIG_PATH=${BSPROOTFS}/lib/pkgconfig \
 		OPENSSL_INCLUDE_DIR=${BSPROOTFS}/include \
 		OPENSSL_LIB_DIR=${BSPROOTFS}/lib \
+		PREFIX=${BSPROOTFS} \
 		make \
 	)
 
@@ -33,8 +34,8 @@ liboqs_uninstall:
 	make -C liboqs-$(LIBOQS_VERSION) uninstall
 
 liboqs_clean:
-	if [ -f "liboqs-$(LIBOQS_VERSION)/Makefile" ]; then make -C liboqs-$(LIBOQS_VERSION) distclean; fi
+	if [ -f "liboqs-$(LIBOQS_VERSION)/Makefile" ]; then make -C liboqs-$(LIBOQS_VERSION) clean; fi
 
 liboqs_distclean:
 	rm -rf liboqs-$(LIBOQS_VERSION)
-	rm -rf liboqs-$(LIBOQS_VERSION).tar.gz
+	rm -rf $(LIBOQS_VERSION).tar.gz
