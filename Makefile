@@ -31,6 +31,9 @@ libevhtp_depends-y = \
 subdir-${DEPENDS_ENABLE_LIBOQS} += \
 	liboqs
 
+liboqs_depends-y = \
+	openssl
+
 subdir-${DEPENDS_ENABLE_UNIVALUE} += \
 	univalue
 

@@ -11,6 +11,8 @@ liboqs_clone:
 
 liboqs_config:
 	$(call patchme,liboqs-$(LIBOQS_VERSION))
+
+liboqs_build:
 	( cd liboqs-$(LIBOQS_VERSION); \
 		CC=${BSPCC} \
 		CXX=${BSPCXX} \
@@ -19,14 +21,10 @@ liboqs_config:
 		CPPFLAGS="${BSPCFLAGS} ${BSPEXTRAFLAGS} -I${BSPROOTFS}/include" \
 		LDFLAGS="${BSPLDFLAGS} ${BSPEXTRAFLAGS} -L${BSPROOTFS}/lib" \
 		PKG_CONFIG_PATH=${BSPROOTFS}/lib/pkgconfig \
-		./configure ${BSPHOST} --prefix=${BSPROOTFS} \
-		--with-pic --enable-static --disable-shared \
-		--enable-openssl --disable-liboqs-regress \
-		--disable-samples --disable-debug-mode; \
+		OPENSSL_INCLUDE_DIR=${BSPROOTFS}/include \
+		OPENSSL_LIB_DIR=${BSPROOTFS}/lib \
+		make \
 	)
-
-liboqs_build:
-	make -C liboqs-$(LIBOQS_VERSION) -j ${BSPJOB}
 
 liboqs_install:
 	make -C liboqs-$(LIBOQS_VERSION) install

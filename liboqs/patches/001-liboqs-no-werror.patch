@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index bc39562..57908e7 100644
+--- a/Makefile
++++ b/Makefile
+@@ -57,7 +57,7 @@ ENABLE_KEMS= # THIS WILL BE FILLED IN BY INDIVIDUAL KEMS' MAKEFILES IN COMBINATI
+ 
+ ENABLE_SIGS= # THIS WILL BE FILLED IN BY INDIVIDUAL SIGS' MAKEFILES IN COMBINATION WITH THE ARCHITECTURE
+ 
+-CFLAGS+=-O2 -std=c99 -Iinclude -I$(OPENSSL_INCLUDE_DIR) -Wno-unused-function -Werror -Wpedantic -Wall -Wextra
++CFLAGS+=-O2 -std=c99 -Iinclude -I$(OPENSSL_INCLUDE_DIR) -Wno-unused-function -Wpedantic -Wall -Wextra
+ ifeq ($(arch), "x64")
+   CFLAGS+= -arch x86_64
+ endif
