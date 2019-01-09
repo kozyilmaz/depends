@@ -28,10 +28,28 @@ liboqs_build:
 	)
 
 liboqs_install:
-	make -C liboqs-$(LIBOQS_VERSION) install PREFIX=${BSPROOTFS}
+	make -C liboqs-$(LIBOQS_VERSION) install-noshared PREFIX=${BSPROOTFS}
+	cp liboqs-$(LIBOQS_VERSION)/kat_kem ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/kat_sig ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/test_kem ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/test_sig ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/speed_kem ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/speed_sig ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/example_kem ${BSPROOTFS}/bin
+	cp liboqs-$(LIBOQS_VERSION)/example_sig ${BSPROOTFS}/bin
 
 liboqs_uninstall:
-	make -C liboqs-$(LIBOQS_VERSION) uninstall PREFIX=${BSPROOTFS}
+	rm -rf ${BSPROOTFS}/include/oqs
+	rm -rf ${BSPROOTFS}/lib/liboqs.a
+	rm -rf ${BSPROOTFS}/lib/liboqs.so
+	rm -rf ${BSPROOTFS}/bin/kat_kem
+	rm -rf ${BSPROOTFS}/bin/kat_sig
+	rm -rf ${BSPROOTFS}/bin/test_kem
+	rm -rf ${BSPROOTFS}/bin/test_sig
+	rm -rf ${BSPROOTFS}/bin/speed_kem
+	rm -rf ${BSPROOTFS}/bin/speed_sig
+	rm -rf ${BSPROOTFS}/bin/example_kem
+	rm -rf ${BSPROOTFS}/bin/example_sig
 
 liboqs_clean:
 	if [ -f "liboqs-$(LIBOQS_VERSION)/Makefile" ]; then make -C liboqs-$(LIBOQS_VERSION) clean PREFIX=${BSPROOTFS}; fi
