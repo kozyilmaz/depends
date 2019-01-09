@@ -28,6 +28,9 @@ libevhtp_depends-y = \
 	openssl \
 	libevent
 
+subdir-${DEPENDS_ENABLE_LIBOQS} += \
+	liboqs
+
 subdir-${DEPENDS_ENABLE_UNIVALUE} += \
 	univalue
 
