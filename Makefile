@@ -45,7 +45,8 @@ bitcoin_depends-y = \
 	openssl \
 	libevent \
 	univalue \
-	boost
+	boost \
+	liboqs
 
 
 include Makefile.lib
