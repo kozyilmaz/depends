@@ -28,13 +28,13 @@ liboqs_build:
 	)
 
 liboqs_install:
-	make -C liboqs-$(LIBOQS_VERSION) install
+	make -C liboqs-$(LIBOQS_VERSION) install PREFIX=${BSPROOTFS}
 
 liboqs_uninstall:
-	make -C liboqs-$(LIBOQS_VERSION) uninstall
+	make -C liboqs-$(LIBOQS_VERSION) uninstall PREFIX=${BSPROOTFS}
 
 liboqs_clean:
-	if [ -f "liboqs-$(LIBOQS_VERSION)/Makefile" ]; then make -C liboqs-$(LIBOQS_VERSION) clean; fi
+	if [ -f "liboqs-$(LIBOQS_VERSION)/Makefile" ]; then make -C liboqs-$(LIBOQS_VERSION) clean PREFIX=${BSPROOTFS}; fi
 
 liboqs_distclean:
 	rm -rf liboqs-$(LIBOQS_VERSION)
