@@ -1,0 +1,384 @@
+diff --git a/Makefile b/Makefile
+index bc39562..b0ab19e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -57,7 +57,7 @@ ENABLE_KEMS= # THIS WILL BE FILLED IN BY INDIVIDUAL KEMS' MAKEFILES IN COMBINATI
+ 
+ ENABLE_SIGS= # THIS WILL BE FILLED IN BY INDIVIDUAL SIGS' MAKEFILES IN COMBINATION WITH THE ARCHITECTURE
+ 
+-CFLAGS+=-O2 -std=c99 -Iinclude -I$(OPENSSL_INCLUDE_DIR) -Wno-unused-function -Werror -Wpedantic -Wall -Wextra
++CFLAGS+=-O2 -std=c11 -Iinclude -I$(OPENSSL_INCLUDE_DIR) -Wno-unused-function -Wpedantic -Wall -Wextra
+ ifeq ($(arch), "x64")
+   CFLAGS+= -arch x86_64
+ endif
+diff --git a/src/kem/BIG_QUAKE/Makefile b/src/kem/BIG_QUAKE/Makefile
+index b6de5bc..7f51884 100644
+--- a/src/kem/BIG_QUAKE/Makefile
++++ b/src/kem/BIG_QUAKE/Makefile
+@@ -30,7 +30,7 @@ OBJS_KEM_BIG_QUAKE_1=$(SRCS_KEM_BIG_QUAKE_1:.c=.o)
+ TO_CLEAN+=$(OBJS_KEM_BIG_QUAKE_1)
+ 
+ src/kem/BIG_QUAKE/upstream/Reference_Implementation/BIG_QUAKE_1/%.o: src/kem/BIG_QUAKE/upstream/Reference_Implementation/BIG_QUAKE_1/%.c
+-	$(CC) -fPIC -c -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -fPIC -c -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_BIG_QUAKE_1_upstream: $(OBJS_KEM_BIG_QUAKE_1)
+ 	bash scripts/collect_objects.sh kem_BIG_QUAKE_1 $(OBJS_KEM_BIG_QUAKE_1)
+@@ -47,7 +47,7 @@ OBJS_KEM_BIG_QUAKE_3=$(SRCS_KEM_BIG_QUAKE_3:.c=.o)
+ TO_CLEAN+=$(OBJS_KEM_BIG_QUAKE_3)
+ 
+ src/kem/BIG_QUAKE/upstream/Reference_Implementation/BIG_QUAKE_3/%.o: src/kem/BIG_QUAKE/upstream/Reference_Implementation/BIG_QUAKE_3/%.c
+-	$(CC) -fPIC -c -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -fPIC -c -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_BIG_QUAKE_3_upstream: $(OBJS_KEM_BIG_QUAKE_3)
+ 	bash scripts/collect_objects.sh kem_BIG_QUAKE_3 $(OBJS_KEM_BIG_QUAKE_3)
+@@ -64,7 +64,7 @@ OBJS_KEM_BIG_QUAKE_5=$(SRCS_KEM_BIG_QUAKE_5:.c=.o)
+ TO_CLEAN+=$(OBJS_KEM_BIG_QUAKE_5)
+ 
+ src/kem/BIG_QUAKE/upstream/Reference_Implementation/BIG_QUAKE_5/%.o: src/kem/BIG_QUAKE/upstream/Reference_Implementation/BIG_QUAKE_5/%.c
+-	$(CC) -fPIC -c -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -fPIC -c -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_BIG_QUAKE_5_upstream: $(OBJS_KEM_BIG_QUAKE_5)
+ 	bash scripts/collect_objects.sh kem_BIG_QUAKE_5 $(OBJS_KEM_BIG_QUAKE_5)
+diff --git a/src/kem/crystals-kyber/Makefile b/src/kem/crystals-kyber/Makefile
+index 33a6b51..4b85e09 100644
+--- a/src/kem/crystals-kyber/Makefile
++++ b/src/kem/crystals-kyber/Makefile
+@@ -39,7 +39,7 @@ OBJS_KEM_KYBER512_CCA_KEM=$(SRCS_KEM_KYBER512_CCA_KEM:.c=.o)
+ TO_CLEAN+=$(OBJS_KEM_KYBER512_CCA_KEM)
+ 
+ src/kem/crystals-kyber/upstream/Optimized_Implementation/crypto_kem/kyber512/%.o: src/kem/crystals-kyber/upstream/Optimized_Implementation/crypto_kem/kyber512/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_kyber512_upstream: $(OBJS_KEM_KYBER512_CCA_KEM)
+ 	bash scripts/collect_objects.sh kem_kyber512 $(OBJS_KEM_KYBER512_CCA_KEM)
+@@ -65,7 +65,7 @@ OBJS_KEM_KYBER768_CCA_KEM=$(SRCS_KEM_KYBER768_CCA_KEM:.c=.o)
+ TO_CLEAN+=$(OBJS_KEM_KYBER768_CCA_KEM)
+ 
+ src/kem/crystals-kyber/upstream/Optimized_Implementation/crypto_kem/kyber768/%.o: src/kem/crystals-kyber/upstream/Optimized_Implementation/crypto_kem/kyber768/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_kyber768_upstream: $(OBJS_KEM_KYBER768_CCA_KEM)
+ 	bash scripts/collect_objects.sh kem_kyber768 $(OBJS_KEM_KYBER768_CCA_KEM)
+@@ -91,7 +91,7 @@ OBJS_KEM_KYBER1024_CCA_KEM=$(SRCS_KEM_KYBER1024_CCA_KEM:.c=.o)
+ TO_CLEAN+=$(OBJS_KEM_KYBER1024_CCA_KEM)
+ 
+ src/kem/crystals-kyber/upstream/Optimized_Implementation/crypto_kem/kyber1024/%.o: src/kem/crystals-kyber/upstream/Optimized_Implementation/crypto_kem/kyber1024/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_kyber1024_usptream: $(OBJS_KEM_KYBER1024_CCA_KEM)
+ 	bash scripts/collect_objects.sh kem_kyber1024 $(OBJS_KEM_KYBER1024_CCA_KEM)
+diff --git a/src/kem/frodokem/upstream/Makefile b/src/kem/frodokem/upstream/Makefile
+index d574a19..61f8de9 100755
+--- a/src/kem/frodokem/upstream/Makefile
++++ b/src/kem/frodokem/upstream/Makefile
+@@ -56,7 +56,7 @@ RANLIB=ranlib
+ LN=ln -s
+ 
+ #CFLAGS= -O3 -std=gnu11 -Wall -Wextra -march=native -DNIX -D $(ARCHITECTURE) -D $(USE_OPT_LEVEL) -D $(USE_GENERATION_A) -D $(USING_OPENSSL)
+-CFLAGS= -O3 -fPIC -std=c99 -Wall -Wextra -DNIX -D $(ARCHITECTURE) -D $(USE_OPT_LEVEL) -D $(USE_GENERATION_A) -D $(USING_OPENSSL)
++CFLAGS= -O3 -fPIC -std=c11 -Wall -Wextra -DNIX -D $(ARCHITECTURE) -D $(USE_OPT_LEVEL) -D $(USE_GENERATION_A) -D $(USING_OPENSSL)
+ ifeq "$(USE_OPENSSL)" "FALSE"
+ LDFLAGS=-lm
+ else
+diff --git a/src/kem/ledakem/upstream/Additional_Implementations/KEM/Benchmarking/Makefile b/src/kem/ledakem/upstream/Additional_Implementations/KEM/Benchmarking/Makefile
+index 1fca1a0..76935dd 100644
+--- a/src/kem/ledakem/upstream/Additional_Implementations/KEM/Benchmarking/Makefile
++++ b/src/kem/ledakem/upstream/Additional_Implementations/KEM/Benchmarking/Makefile
+@@ -11,7 +11,7 @@
+ 
+   REFERENCE_IMPL_PATH = ../../../Reference_Implementation/KEM
+   
+-  CFLAGS = -DCPU_WORD_BITS=64 -std=c99 -Wall -pedantic -Wmaybe-uninitialized -Wuninitialized -march=nocona -funroll-loops -O3
++  CFLAGS = -DCPU_WORD_BITS=64 -std=c11 -Wall -pedantic -Wmaybe-uninitialized -Wuninitialized -march=nocona -funroll-loops -O3
+   LDFLAGS = -lm
+   INCLUDES = -I./include -I$(REFERENCE_IMPL_PATH)/include
+   SRCDIR_MAIN_FILE = library
+diff --git a/src/kem/ledakem/upstream/Additional_Implementations/KEM/KAT_generation/Makefile b/src/kem/ledakem/upstream/Additional_Implementations/KEM/KAT_generation/Makefile
+index 42412ec..377e63b 100644
+--- a/src/kem/ledakem/upstream/Additional_Implementations/KEM/KAT_generation/Makefile
++++ b/src/kem/ledakem/upstream/Additional_Implementations/KEM/KAT_generation/Makefile
+@@ -13,7 +13,7 @@
+   
+   REFERENCE_IMPL_PATH = ../../../Reference_Implementation/KEM
+   
+-  CFLAGS = $(QFORM_CFLAG) -DCPU_WORD_BITS=64 -std=c99 -Wall -pedantic -Wmaybe-uninitialized -Wuninitialized -march=native -g3 -O3
++  CFLAGS = $(QFORM_CFLAG) -DCPU_WORD_BITS=64 -std=c11 -Wall -pedantic -Wmaybe-uninitialized -Wuninitialized -march=native -g3 -O3
+   LDFLAGS = -lm 
+   INCLUDES = -I./include -I$(REFERENCE_IMPL_PATH)/include
+   SRCDIR_MAIN_FILE = library
+diff --git a/src/kem/ledakem/upstream/Reference_Implementation/KEM/Makefile b/src/kem/ledakem/upstream/Reference_Implementation/KEM/Makefile
+index 04d1d1b..25b1d8c 100644
+--- a/src/kem/ledakem/upstream/Reference_Implementation/KEM/Makefile
++++ b/src/kem/ledakem/upstream/Reference_Implementation/KEM/Makefile
+@@ -54,7 +54,7 @@ endif
+   CC = gcc 
+ 
+   CFLAGS =  -fPIC -DCATEGORY=$(SL) -DN0=$(N0) -DCPU_WORD_BITS=64 \
+-           -std=c99 -Wall -pedantic -Wmaybe-uninitialized -Wuninitialized \
++           -std=c11 -Wall -pedantic -Wmaybe-uninitialized -Wuninitialized \
+ 	   -march=native -O3
+   LDFLAGS = -lm 
+   INCLUDES = -I./include
+diff --git a/src/kem/lima/Makefile b/src/kem/lima/Makefile
+index 8196361..957eb55 100644
+--- a/src/kem/lima/Makefile
++++ b/src/kem/lima/Makefile
+@@ -69,40 +69,40 @@ TO_CLEAN+= $(OBJS_KEM_LIMA_SP_1822_CCA_KEM)
+ TO_CLEAN+= $(OBJS_KEM_LIMA_SP_2062_CCA_KEM)
+ 
+ src/kem/lima/upstream/optimized-implementation-master/Lib/%.o: src/kem/lima/upstream/optimized-implementation-master/Lib/%.c libkeccak
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR) -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR) -I$(KECCAK_INCLUDE_DIR)
+ 
+ kem_lima_2p_1024_cca_kem_upstream: $(OBJS_KEM_LIMA_2P_1024_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c
+-	$(CC) -c -fPIC -O3 -std=c99 -DLIMASZ=1024 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_2p_1024_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -DLIMASZ=1024 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_2p_1024_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
+ 	bash scripts/collect_objects.sh kem_lima_2p_1024_cca_kem $(OBJS_KEM_LIMA_2P_1024_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_2p_1024_cca.o
+ 	bash scripts/symbols_global_rename.sh kem_lima_2p_1024_cca_kem src/kem/lima/symbols_global_rename_2p_1024.txt
+ 	bash scripts/symbols_local.sh kem_lima_2p_1024_cca_kem src/kem/lima/symbols_local.txt
+ 
+ kem_lima_2p_2048_cca_kem_upstream: $(OBJS_KEM_LIMA_2P_2048_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c
+-	$(CC) -c -fPIC -O3 -std=c99 -DLIMASZ=2048 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_2p_2048_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -DLIMASZ=2048 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_2p_2048_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
+ 	bash scripts/collect_objects.sh kem_lima_2p_2048_cca_kem $(OBJS_KEM_LIMA_2P_2048_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_2p_2048_cca.o
+ 	bash scripts/symbols_global_rename.sh kem_lima_2p_2048_cca_kem src/kem/lima/symbols_global_rename_2p_2048.txt
+ 	bash scripts/symbols_local.sh kem_lima_2p_2048_cca_kem src/kem/lima/symbols_local.txt
+ 
+ kem_lima_sp_1018_cca_kem_upstream: $(OBJS_KEM_LIMA_SP_1018_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c
+-	$(CC) -c -fPIC -O3 -std=c99 -DLIMASZ=1018 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1018_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -DLIMASZ=1018 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1018_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
+ 	bash scripts/collect_objects.sh kem_lima_sp_1018_cca_kem $(OBJS_KEM_LIMA_SP_1018_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1018_cca.o
+ 	bash scripts/symbols_global_rename.sh kem_lima_sp_1018_cca_kem src/kem/lima/symbols_global_rename_sp_1018.txt
+ 	bash scripts/symbols_local.sh kem_lima_sp_1018_cca_kem src/kem/lima/symbols_local.txt
+ 
+ kem_lima_sp_1306_cca_kem_upstream: $(OBJS_KEM_LIMA_SP_1306_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c
+-	$(CC) -c -fPIC -O3 -std=c99 -DLIMASZ=1306 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1306_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -DLIMASZ=1306 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1306_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
+ 	bash scripts/collect_objects.sh kem_lima_sp_1306_cca_kem $(OBJS_KEM_LIMA_SP_1306_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1306_cca.o
+ 	bash scripts/symbols_global_rename.sh kem_lima_sp_1306_cca_kem src/kem/lima/symbols_global_rename_sp_1306.txt
+ 	bash scripts/symbols_local.sh kem_lima_sp_1306_cca_kem src/kem/lima/symbols_local.txt
+ 
+ kem_lima_sp_1822_cca_kem_upstream: $(OBJS_KEM_LIMA_SP_1822_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c
+-	$(CC) -c -fPIC -O3 -std=c99 -DLIMASZ=1822 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1822_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -DLIMASZ=1822 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1822_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
+ 	bash scripts/collect_objects.sh kem_lima_sp_1822_cca_kem $(OBJS_KEM_LIMA_SP_1822_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_1822_cca.o
+ 	bash scripts/symbols_global_rename.sh kem_lima_sp_1822_cca_kem src/kem/lima/symbols_global_rename_sp_1822.txt
+ 	bash scripts/symbols_local.sh kem_lima_sp_1822_cca_kem src/kem/lima/symbols_local.txt
+ 
+ kem_lima_sp_2062_cca_kem_upstream: $(OBJS_KEM_LIMA_SP_2062_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c
+-	$(CC) -c -fPIC -O3 -std=c99 -DLIMASZ=2062 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_2062_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -DLIMASZ=2062 -o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_2062_cca.o src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem.c -Isrc/kem/lima/upstream/optimized-implementation-master/Lib -I$(KECCAK_INCLUDE_DIR)
+ 	bash scripts/collect_objects.sh kem_lima_sp_2062_cca_kem $(OBJS_KEM_LIMA_SP_2062_CCA_KEM) src/kem/lima/upstream/optimized-implementation-master/NIST/EncapCCA/kem_lima_sp_2062_cca.o
+ 	bash scripts/symbols_global_rename.sh kem_lima_sp_2062_cca_kem src/kem/lima/symbols_global_rename_sp_2062.txt
+ 	bash scripts/symbols_local.sh kem_lima_sp_2062_cca_kem src/kem/lima/symbols_local.txt
+diff --git a/src/kem/newhopenist/Makefile b/src/kem/newhopenist/Makefile
+index 48578e7..6bc25fb 100644
+--- a/src/kem/newhopenist/Makefile
++++ b/src/kem/newhopenist/Makefile
+@@ -28,7 +28,7 @@ OBJS_KEM_NEWHOPE_512_CCA_KEM=$(SRCS_KEM_NEWHOPE_512_CCA_KEM:.c=.o)
+ TO_CLEAN+= $(OBJS_KEM_NEWHOPE_512_CCA_KEM)
+ 
+ src/kem/newhopenist/upstream/Optimized_Implementation/crypto_kem/newhope512cca/%.o: src/kem/newhopenist/upstream/Optimized_Implementation/crypto_kem/newhope512cca/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_newhope_512_cca_kem_upstream: $(OBJS_KEM_NEWHOPE_512_CCA_KEM)
+ 	bash scripts/collect_objects.sh kem_newhope_512_cca_kem $(OBJS_KEM_NEWHOPE_512_CCA_KEM)
+@@ -45,7 +45,7 @@ OBJS_KEM_NEWHOPE_1024_CCA_KEM=$(SRCS_KEM_NEWHOPE_1024_CCA_KEM:.c=.o)
+ TO_CLEAN+= $(OBJS_KEM_NEWHOPE_1024_CCA_KEM)
+ 
+ src/kem/newhopenist/upstream/Optimized_Implementation/crypto_kem/newhope1024cca/%.o: src/kem/newhopenist/upstream/Optimized_Implementation/crypto_kem/newhope1024cca/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_newhope_1024_cca_kem_upstream: $(OBJS_KEM_NEWHOPE_1024_CCA_KEM)
+ 	bash scripts/collect_objects.sh kem_newhope_1024_cca_kem $(OBJS_KEM_NEWHOPE_1024_CCA_KEM)
+diff --git a/src/kem/saber/Makefile b/src/kem/saber/Makefile
+index 9bb1ac7..7073b1c 100644
+--- a/src/kem/saber/Makefile
++++ b/src/kem/saber/Makefile
+@@ -28,7 +28,7 @@ OBJS_KEM_SABER_LIGHT_SABER_KEM=$(SRCS_KEM_SABER_LIGHT_SABER_KEM:.c=.o)
+ TO_CLEAN+= $(OBJS_KEM_SABER_LIGHT_SABER_KEM)
+ 
+ src/kem/saber/upstream/Optimized_Implementation_KEM/light_saber/%.o: src/kem/saber/upstream/Optimized_Implementation_KEM/light_saber/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_saber_light_saber_kem_upstream: $(OBJS_KEM_SABER_LIGHT_SABER_KEM)
+ 	bash scripts/collect_objects.sh kem_saber_light_saber_kem $(OBJS_KEM_SABER_LIGHT_SABER_KEM)
+@@ -45,7 +45,7 @@ OBJS_KEM_SABER_SABER_KEM=$(SRCS_KEM_SABER_SABER_KEM:.c=.o)
+ TO_CLEAN+= $(OBJS_KEM_SABER_SABER_KEM)
+ 
+ src/kem/saber/upstream/Optimized_Implementation_KEM/saber/%.o: src/kem/saber/upstream/Optimized_Implementation_KEM/saber/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_saber_saber_kem_upstream: $(OBJS_KEM_SABER_SABER_KEM)
+ 	bash scripts/collect_objects.sh kem_saber_saber_kem $(OBJS_KEM_SABER_SABER_KEM)
+@@ -62,7 +62,7 @@ OBJS_KEM_SABER_FIRE_SABER_KEM=$(SRCS_KEM_SABER_FIRE_SABER_KEM:.c=.o)
+ TO_CLEAN+= $(OBJS_KEM_SABER_FIRE_SABER_KEM)
+ 
+ src/kem/saber/upstream/Optimized_Implementation_KEM/fire_saber/%.o: src/kem/saber/upstream/Optimized_Implementation_KEM/fire_saber/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $< -I$(OPENSSL_INCLUDE_DIR)
+ 
+ kem_saber_fire_saber_kem_upstream: $(OBJS_KEM_SABER_FIRE_SABER_KEM)
+ 	bash scripts/collect_objects.sh kem_saber_fire_saber_kem $(OBJS_KEM_SABER_FIRE_SABER_KEM)
+diff --git a/src/kem/saber/upstream/Optimized_Implementation_KEM/fire_saber/Makefile b/src/kem/saber/upstream/Optimized_Implementation_KEM/fire_saber/Makefile
+index 8c5bb32..1352f7c 100644
+--- a/src/kem/saber/upstream/Optimized_Implementation_KEM/fire_saber/Makefile
++++ b/src/kem/saber/upstream/Optimized_Implementation_KEM/fire_saber/Makefile
+@@ -1,6 +1,6 @@
+ CC 		  = /usr/bin/cc
+ CFLAGS  = -Wall -Wextra -O3 -fomit-frame-pointer -lcrypto -march=native 
+-CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c99 
++CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c11 
+ CFLAGS3  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native 
+ CLANG   = clang -march=native -O3 -fomit-frame-pointer -fwrapv -Qunused-arguments
+ RM 		  = /bin/rm
+diff --git a/src/kem/saber/upstream/Optimized_Implementation_KEM/light_saber/Makefile b/src/kem/saber/upstream/Optimized_Implementation_KEM/light_saber/Makefile
+index 8c5bb32..1352f7c 100644
+--- a/src/kem/saber/upstream/Optimized_Implementation_KEM/light_saber/Makefile
++++ b/src/kem/saber/upstream/Optimized_Implementation_KEM/light_saber/Makefile
+@@ -1,6 +1,6 @@
+ CC 		  = /usr/bin/cc
+ CFLAGS  = -Wall -Wextra -O3 -fomit-frame-pointer -lcrypto -march=native 
+-CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c99 
++CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c11 
+ CFLAGS3  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native 
+ CLANG   = clang -march=native -O3 -fomit-frame-pointer -fwrapv -Qunused-arguments
+ RM 		  = /bin/rm
+diff --git a/src/kem/saber/upstream/Optimized_Implementation_KEM/saber/Makefile b/src/kem/saber/upstream/Optimized_Implementation_KEM/saber/Makefile
+index 8c5bb32..1352f7c 100644
+--- a/src/kem/saber/upstream/Optimized_Implementation_KEM/saber/Makefile
++++ b/src/kem/saber/upstream/Optimized_Implementation_KEM/saber/Makefile
+@@ -1,6 +1,6 @@
+ CC 		  = /usr/bin/cc
+ CFLAGS  = -Wall -Wextra -O3 -fomit-frame-pointer -lcrypto -march=native 
+-CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c99 
++CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c11 
+ CFLAGS3  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native 
+ CLANG   = clang -march=native -O3 -fomit-frame-pointer -fwrapv -Qunused-arguments
+ RM 		  = /bin/rm
+diff --git a/src/kem/saber/upstream/Reference_Implementation_KEM/fire_saber/Makefile b/src/kem/saber/upstream/Reference_Implementation_KEM/fire_saber/Makefile
+index 8c5bb32..1352f7c 100644
+--- a/src/kem/saber/upstream/Reference_Implementation_KEM/fire_saber/Makefile
++++ b/src/kem/saber/upstream/Reference_Implementation_KEM/fire_saber/Makefile
+@@ -1,6 +1,6 @@
+ CC 		  = /usr/bin/cc
+ CFLAGS  = -Wall -Wextra -O3 -fomit-frame-pointer -lcrypto -march=native 
+-CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c99 
++CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c11 
+ CFLAGS3  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native 
+ CLANG   = clang -march=native -O3 -fomit-frame-pointer -fwrapv -Qunused-arguments
+ RM 		  = /bin/rm
+diff --git a/src/kem/saber/upstream/Reference_Implementation_KEM/light_saber/Makefile b/src/kem/saber/upstream/Reference_Implementation_KEM/light_saber/Makefile
+index 4d54ff1..36c96ab 100644
+--- a/src/kem/saber/upstream/Reference_Implementation_KEM/light_saber/Makefile
++++ b/src/kem/saber/upstream/Reference_Implementation_KEM/light_saber/Makefile
+@@ -1,6 +1,6 @@
+ CC 		  = /usr/bin/cc
+ CFLAGS  = -Wall -Wextra -O3 -fomit-frame-pointer -lcrypto -march=native 
+-CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c99 
++CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c11 
+ CFLAGS3  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native 
+ CLANG   = clang -march=native -O3 -fomit-frame-pointer -fwrapv -Qunused-arguments
+ RM 		  = /bin/rm
+diff --git a/src/kem/saber/upstream/Reference_Implementation_KEM/saber/Makefile b/src/kem/saber/upstream/Reference_Implementation_KEM/saber/Makefile
+index 4d54ff1..36c96ab 100644
+--- a/src/kem/saber/upstream/Reference_Implementation_KEM/saber/Makefile
++++ b/src/kem/saber/upstream/Reference_Implementation_KEM/saber/Makefile
+@@ -1,6 +1,6 @@
+ CC 		  = /usr/bin/cc
+ CFLAGS  = -Wall -Wextra -O3 -fomit-frame-pointer -lcrypto -march=native 
+-CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c99 
++CFLAGS2  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native -std=c11 
+ CFLAGS3  = -Wall -Wextra -O3 -fomit-frame-pointer -march=native 
+ CLANG   = clang -march=native -O3 -fomit-frame-pointer -fwrapv -Qunused-arguments
+ RM 		  = /bin/rm
+diff --git a/src/sig/crystals-dilithium/Makefile b/src/sig/crystals-dilithium/Makefile
+index b03dab6..18fe56d 100644
+--- a/src/sig/crystals-dilithium/Makefile
++++ b/src/sig/crystals-dilithium/Makefile
+@@ -22,7 +22,7 @@ OBJS_SIG_DILITHIUM_II_MEDIUM=$(SRCS_SIG_DILITHIUM_II_MEDIUM:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_DILITHIUM_II_MEDIUM)
+ 
+ src/sig/crystals-dilithium/upstream/Reference_Implementation/Dilithium_medium/%.o: src/sig/crystals-dilithium/upstream/Reference_Implementation/Dilithium_medium/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $<
+ 
+ sig_Dilithium_II_medium_upstream: $(OBJS_SIG_DILITHIUM_II_MEDIUM)
+ 	bash scripts/collect_objects.sh sig_Dilithium_II_medium $(OBJS_SIG_DILITHIUM_II_MEDIUM)
+@@ -42,7 +42,7 @@ OBJS_SIG_DILITHIUM_III_RECOMMENDED=$(SRCS_SIG_DILITHIUM_III_RECOMMENDED:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_DILITHIUM_III_RECOMMENDED)
+ 
+ src/sig/crystals-dilithium/upstream/Reference_Implementation/Dilithium_recommended/%.o: src/sig/crystals-dilithium/upstream/Reference_Implementation/Dilithium_recommended/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $<
+ 
+ sig_Dilithium_III_recommended_upstream: $(OBJS_SIG_DILITHIUM_III_RECOMMENDED)
+ 	bash scripts/collect_objects.sh sig_Dilithium_III_recommended $(OBJS_SIG_DILITHIUM_III_RECOMMENDED)
+@@ -61,7 +61,7 @@ OBJS_SIG_DILITHIUM_IV_VERY_HIGH=$(SRCS_SIG_DILITHIUM_IV_VERY_HIGH:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_DILITHIUM_IV_VERY_HIGH)
+ 
+ src/sig/crystals-dilithium/upstream/Reference_Implementation/Dilithium_very_high/%.o: src/sig/crystals-dilithium/upstream/Reference_Implementation/Dilithium_very_high/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -o $@ $<
+ 
+ sig_Dilithium_IV_very_high_upstream: $(OBJS_SIG_DILITHIUM_IV_VERY_HIGH)
+ 	bash scripts/collect_objects.sh sig_Dilithium_IV_very_high $(OBJS_SIG_DILITHIUM_IV_VERY_HIGH)
+diff --git a/src/sig/qtesla/Makefile b/src/sig/qtesla/Makefile
+index 87728c6..a55b78d 100644
+--- a/src/sig/qtesla/Makefile
++++ b/src/sig/qtesla/Makefile
+@@ -24,7 +24,7 @@ OBJS_SIG_QTESLA_I=$(SRCS_SIG_QTESLA_I:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_QTESLA_I)
+ 
+ src/sig/qtesla/upstream/Reference_implementation/qTesla_I/%.o: src/sig/qtesla/upstream/Reference_implementation/qTesla_I/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $<
+ 
+ sig_qTESLA_I_upstream: $(OBJS_SIG_QTESLA_I)
+ 	bash scripts/collect_objects.sh sig_qTESLA_I $(OBJS_SIG_QTESLA_I)
+@@ -41,7 +41,7 @@ OBJS_SIG_QTESLA_III_SIZE=$(SRCS_SIG_QTESLA_III_SIZE:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_QTESLA_III_SIZE)
+ 
+ src/sig/qtesla/upstream/Reference_implementation/qTesla_III_size/%.o: src/sig/qtesla/upstream/Reference_implementation/qTesla_III_size/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $<
+ 
+ sig_qTESLA_III_size_upstream: $(OBJS_SIG_QTESLA_III_SIZE)
+ 	bash scripts/collect_objects.sh sig_qTESLA_III_size $(OBJS_SIG_QTESLA_III_SIZE)
+@@ -58,7 +58,7 @@ OBJS_SIG_QTESLA_III_SPEED=$(SRCS_SIG_QTESLA_III_SPEED:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_QTESLA_III_SPEED)
+ 
+ src/sig/qtesla/upstream/Reference_implementation/qTesla_III_speed/%.o: src/sig/qtesla/upstream/Reference_implementation/qTesla_III_speed/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $<
+ 
+ sig_qTESLA_III_speed_upstream: $(OBJS_SIG_QTESLA_III_SPEED)
+ 	bash scripts/collect_objects.sh sig_qTESLA_III_speed $(OBJS_SIG_QTESLA_III_SPEED)
+@@ -75,7 +75,7 @@ OBJS_SIG_QTESLA_P_I=$(SRCS_SIG_QTESLA_P_I:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_QTESLA_P_I)
+ 
+ src/sig/qtesla/upstream/Reference_implementation/qTesla_p_I/%.o: src/sig/qtesla/upstream/Reference_implementation/qTesla_p_I/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $<
+ 
+ sig_qTESLA_p_I_upstream: $(OBJS_SIG_QTESLA_P_I)
+ 	bash scripts/collect_objects.sh sig_qTESLA_p_I $(OBJS_SIG_QTESLA_P_I)
+@@ -92,7 +92,7 @@ OBJS_SIG_QTESLA_P_III=$(SRCS_SIG_QTESLA_P_III:.c=.o)
+ TO_CLEAN+= $(OBJS_SIG_QTESLA_P_III)
+ 
+ src/sig/qtesla/upstream/Reference_implementation/qTesla_p_III/%.o: src/sig/qtesla/upstream/Reference_implementation/qTesla_p_III/%.c
+-	$(CC) -c -fPIC -O3 -std=c99 -march=native -o $@ $<
++	$(CC) -c -fPIC -O3 -std=c11 -march=native -o $@ $<
+ 
+ sig_qTESLA_p_III_upstream: $(OBJS_SIG_QTESLA_P_III)
+ 	bash scripts/collect_objects.sh sig_qTESLA_p_III $(OBJS_SIG_QTESLA_P_III)
