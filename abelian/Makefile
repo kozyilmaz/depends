@@ -22,10 +22,10 @@ abelian_build:
 	)
 
 abelian_install:
-	cp abelian-test/kat_kem ${BSPROOTFS}/bin
+	cp abelian-test/address ${BSPROOTFS}/bin/abe-address
 
 abelian_uninstall:
-	rm -rf ${BSPROOTFS}/include/oqs
+	rm -rf ${BSPROOTFS}/bin/abe-address
 
 abelian_clean:
 	make -C abelian-test clean

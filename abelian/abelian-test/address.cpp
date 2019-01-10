@@ -128,6 +128,9 @@ int main (int argc, char *argv[])
 	printf("segwit address : %s\n", EncodeDestination(GetDestinationForKey(key.GetPubKey(), OutputType::P2SH_SEGWIT)).c_str());
 	printf("bech32 address : %s\n", EncodeDestination(GetDestinationForKey(key.GetPubKey(), OutputType::BECH32)).c_str());
 
+	free(keystr);
+	free(pubkeystr);
+
 out:
 	bitcoin_fini();
 	return 0;
