@@ -39,10 +39,4 @@ address_libraries-y = ${common_libraries}
 address_ldflags-y   = ${common_ldflags}
 
 
-dist.dir = \
-	../dist
-
-dist.bin-y = \
-	address
-
 include Makefile.lib

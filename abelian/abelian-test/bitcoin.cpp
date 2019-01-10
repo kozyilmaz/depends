@@ -40,6 +40,8 @@ bool bitcoin_init (const char *network)
 		printf("invalid network\n");
 		goto err0;
 	}
+	printf("using the '%s' network\n", chain.c_str());
+
 	// init sha256
 	sha256_algo = SHA256AutoDetect();
 	printf("using the '%s' SHA256 implementation\n", sha256_algo.c_str());
