@@ -48,6 +48,13 @@ bitcoin_depends-y = \
 	boost \
 	liboqs
 
+subdir-${DEPENDS_ENABLE_ABELIAN} += \
+	abelian
+
+abelian_depends-y = \
+	liboqs \
+	bitcoin
+
 
 include Makefile.lib
 
