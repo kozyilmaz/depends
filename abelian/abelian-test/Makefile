@@ -11,7 +11,7 @@ common_cflags = \
 
 common_cxxflags = \
 	${common_cflags} \
-	-std=c++11 \
+	-std=c++11
 
 common_libraries = \
 	${BSPROOTFS}/lib \
@@ -29,6 +29,7 @@ common_ldflags = \
 	-lboost_program_options-mt \
 	-lboost_thread-mt \
 	-lboost_chrono-mt \
+	-loqs \
 	$(shell PKG_CONFIG_PATH=${BSPROOTFS}/lib/pkgconfig pkg-config openssl --static --libs)
 
 # address
