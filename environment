@@ -31,14 +31,14 @@ elif [ "ios64" == "$ARG" ]; then
     BSPCC=$(xcrun --sdk iphoneos -f clang)
     BSPCXX=$(xcrun --sdk iphoneos -f clang++)
     BSPHOST="--host=aarch64-apple-darwin"
-    BSPCFLAGS="-arch arm64 -miphoneos-version-min=11.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -fno-common"
+    BSPCFLAGS="-arch arm64 -miphoneos-version-min=12.1 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -fno-common"
     BSPLDFLAGS=
     BSPPLATFORM=ios64
 elif [ "iossim" == "$ARG" ]; then
     BSPCC=$(xcrun --sdk iphonesimulator -f clang)
     BSPCXX=$(xcrun --sdk iphonesimulator -f clang++)
     BSPHOST="--host=x86_64-apple-darwin"
-    BSPCFLAGS="-arch x86_64 -miphoneos-version-min=11.0 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path) -fno-common"
+    BSPCFLAGS="-arch x86_64 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
     BSPLDFLAGS=
     BSPPLATFORM=iossim
 fi
