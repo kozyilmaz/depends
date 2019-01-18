@@ -38,7 +38,7 @@ elif [ "iossim" == "$ARG" ]; then
     BSPCC=$(xcrun --sdk iphonesimulator -f clang)
     BSPCXX=$(xcrun --sdk iphonesimulator -f clang++)
     BSPHOST="--host=x86_64-apple-darwin"
-    BSPCFLAGS="-arch x86_64 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
+    BSPCFLAGS="-arch x86_64 -miphonesimulator-version-min=12.1 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
     BSPLDFLAGS=
     BSPPLATFORM=iossim
 fi
