@@ -3,7 +3,7 @@ target_name ?= openssl
 
 include ../Makefile.build
 
-OPENSSL_VERSION=1.1.1
+OPENSSL_VERSION=1.1.1a
 
 ifeq      ($(TARGET_PLATFORM),WINDOWS)
 else ifeq ($(TARGET_PLATFORM),MACOS)
