@@ -27,6 +27,7 @@ bitcoin_config:
 		--with-utils --with-libs \
 		--with-boost=${BSPROOTFS} \
 		--with-system-univalue \
+		--enable-debug \
 		SSL_CFLAGS="-I${BSPROOTFS}/include" SSL_LIBS="-L${BSPROOTFS}/lib -lssl" \
 		CRYPTO_CFLAGS="-I${BSPROOTFS}/include" CRYPTO_LIBS="-L${BSPROOTFS}/lib -lcrypto" \
 		EVENT_CFLAGS="-I${BSPROOTFS}/include" EVENT_LIBS="-L${BSPROOTFS}/lib -levent" \
