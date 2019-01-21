@@ -3,14 +3,13 @@ target_name ?= bitcoin
 
 include ../Makefile.build
 
-BITCOIN_VERSION=0.17.1
+BITCOIN_VERSION=abelian
 
 bitcoin_clone:
-	if [ ! -f "bitcoin-$(BITCOIN_VERSION).tar.gz" ]; then curl -OL https://bitcoincore.org/bin/bitcoin-core-$(BITCOIN_VERSION)/bitcoin-$(BITCOIN_VERSION).tar.gz; fi
-	if [ ! -d "bitcoin-$(BITCOIN_VERSION)" ]; then tar xvf bitcoin-$(BITCOIN_VERSION).tar.gz; fi
+	if [ ! -d "bitcoin-$(BITCOIN_VERSION)" ]; then git clone https://github.com/kozyilmaz/bitcoin.git bitcoin-$(BITCOIN_VERSION); cd bitcoin-$(BITCOIN_VERSION); git checkout $(BITCOIN_VERSION); cd ..; fi;
 
 bitcoin_config:
-	$(call patchme,bitcoin-$(BITCOIN_VERSION))
+#	$(call patchme,bitcoin-$(BITCOIN_VERSION))
 	( cd bitcoin-$(BITCOIN_VERSION) && ./autogen.sh; \
 		CC=${BSPCC} \
 		CXX=${BSPCXX} \
@@ -120,4 +119,3 @@ bitcoin_clean:
 
 bitcoin_distclean:
 	rm -rf bitcoin-$(BITCOIN_VERSION)
-	rm -rf bitcoin-$(BITCOIN_VERSION).tar.gz
