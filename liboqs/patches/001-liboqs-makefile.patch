@@ -1,0 +1,27 @@
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 75eb8d5..a52c89a 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -28,13 +28,13 @@ test_sig_LDADD        = ${LIB_FLAGS}
+ kat_kem_LDADD         = ${LIB_FLAGS}
+ 
+ if USE_OPENSSL
+-example_kem_LDADD     += -L$(OPENSSL_DIR)/lib -lcrypto
+-example_sig_LDADD     += -L$(OPENSSL_DIR)/lib -lcrypto
+-speed_kem_LDADD       += -L$(OPENSSL_DIR)/lib -lcrypto
+-speed_sig_LDADD       += -L$(OPENSSL_DIR)/lib -lcrypto
+-test_aes_LDADD        += -L$(OPENSSL_DIR)/lib -lcrypto
+-test_kem_LDADD        += -L$(OPENSSL_DIR)/lib -lcrypto
+-test_sha3_LDADD       += -L$(OPENSSL_DIR)/lib -lcrypto
+-test_sig_LDADD        += -L$(OPENSSL_DIR)/lib -lcrypto
+-kat_kem_LDADD         += -L$(OPENSSL_DIR)/lib -lcrypto
++example_kem_LDADD     += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++example_sig_LDADD     += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++speed_kem_LDADD       += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++speed_sig_LDADD       += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++test_aes_LDADD        += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++test_kem_LDADD        += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++test_sha3_LDADD       += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++test_sig_LDADD        += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
++kat_kem_LDADD         += -L$(OPENSSL_DIR)/lib -lcrypto -lpthread
+ endif

@@ -9,6 +9,7 @@ liboqs_clone:
 	if [ ! -d "liboqs-$(LIBOQS_VERSION)" ]; then git clone https://github.com/open-quantum-safe/liboqs.git liboqs-$(LIBOQS_VERSION); cd liboqs-$(LIBOQS_VERSION); git checkout $(LIBOQS_VERSION); cd ..; fi;
 
 liboqs_config:
+	$(call patchme,liboqs-$(LIBOQS_VERSION))
 	if [ ! -f "liboqs-$(LIBOQS_VERSION)/configure" ]; then (cd liboqs-$(LIBOQS_VERSION) && LIBTOOLIZE=glibtoolize autoreconf -i -v -f); fi
 	( cd liboqs-$(LIBOQS_VERSION); \
 		CC=${BSPCC} \
