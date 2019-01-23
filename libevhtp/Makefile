@@ -3,7 +3,7 @@ target_name ?= libevhtp
 
 include ../Makefile.build
 
-LIBEVHTP_VERSION=1.2.17-beta
+LIBEVHTP_VERSION=1.2.17
 
 libevhtp_clone:
 	if [ ! -f "libevhtp-$(LIBEVHTP_VERSION).tar.gz" ]; then curl -L https://github.com/criticalstack/libevhtp/archive/$(LIBEVHTP_VERSION).tar.gz -o libevhtp-$(LIBEVHTP_VERSION).tar.gz; fi

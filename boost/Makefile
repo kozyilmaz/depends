@@ -29,7 +29,7 @@ boost_config:
 	fi
 	echo "using $(BOOST_TOOLSET) : custom : ${BSPCXX} ${BSPCFLAGS} ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
 	( cd boost_$(BOOST_VERSION); \
-		./bootstrap.sh --prefix=${BSPROOTFS} --without-icu --with-libraries=chrono,filesystem,program_options,system,thread,test \
+		./bootstrap.sh --prefix=${BSPROOTFS} --without-icu --with-libraries=chrono,filesystem,system,thread,test \
 	)
 
 boost_build:
