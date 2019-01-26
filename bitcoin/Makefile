@@ -68,6 +68,10 @@ bitcoin_install:
 	mkdir -p ${BSPROOTFS}/include/bitcoin/primitives; cp bitcoin-$(BITCOIN_VERSION)/src/primitives/*.h ${BSPROOTFS}/include/bitcoin/primitives
 # consensus
 	mkdir -p ${BSPROOTFS}/include/bitcoin/consensus; cp bitcoin-$(BITCOIN_VERSION)/src/consensus/*.h ${BSPROOTFS}/include/bitcoin/consensus
+# rpc
+	mkdir -p ${BSPROOTFS}/include/bitcoin/rpc; cp bitcoin-$(BITCOIN_VERSION)/src/rpc/*.h ${BSPROOTFS}/include/bitcoin/rpc
+# policy
+	mkdir -p ${BSPROOTFS}/include/bitcoin/policy; cp bitcoin-$(BITCOIN_VERSION)/src/policy/*.h ${BSPROOTFS}/include/bitcoin/policy
 # others
 	cp bitcoin-$(BITCOIN_VERSION)/src/prevector.h ${BSPROOTFS}/include/bitcoin
 	cp bitcoin-$(BITCOIN_VERSION)/src/span.h ${BSPROOTFS}/include/bitcoin
@@ -101,6 +105,11 @@ bitcoin_install:
 	cp bitcoin-$(BITCOIN_VERSION)/src/base58.h ${BSPROOTFS}/include/bitcoin
 	cp bitcoin-$(BITCOIN_VERSION)/src/core_io.h ${BSPROOTFS}/include/bitcoin
 	cp bitcoin-$(BITCOIN_VERSION)/src/utilstrencodings.h ${BSPROOTFS}/include/bitcoin
+	cp bitcoin-$(BITCOIN_VERSION)/src/coins.h ${BSPROOTFS}/include/bitcoin
+	cp bitcoin-$(BITCOIN_VERSION)/src/compressor.h ${BSPROOTFS}/include/bitcoin
+	cp bitcoin-$(BITCOIN_VERSION)/src/core_memusage.h ${BSPROOTFS}/include/bitcoin
+	cp bitcoin-$(BITCOIN_VERSION)/src/memusage.h ${BSPROOTFS}/include/bitcoin
+	cp bitcoin-$(BITCOIN_VERSION)/src/indirectmap.h ${BSPROOTFS}/include/bitcoin
 
 bitcoin_uninstall:
 	if [ -f "${BSPROOTFS}/bin/bitcoind" ]; then rm -rf ${BSPROOTFS}/bin/bitcoind; fi
