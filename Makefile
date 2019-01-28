@@ -44,6 +44,11 @@ bitcoin_depends-y = \
 
 include Makefile.lib
 
+syscheck:
+	@echo "  SYSCHECK   tools"
+	@git fetch https://github.com/kozyilmaz/tools.git master
+	@$(TOPDIR)/tools/contrib/devtools/git-subtree-check.sh tools
+
 clone:
 	@true
 
