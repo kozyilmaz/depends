@@ -26,7 +26,6 @@ common_ldflags = \
 	-lunivalue \
 	-lboost_system-mt \
 	-lboost_filesystem-mt \
-	-lboost_program_options-mt \
 	-lboost_thread-mt \
 	-lboost_chrono-mt \
 	-loqs \
