@@ -3,7 +3,7 @@ target_name ?= bitcoin
 
 include ../Makefile.build
 
-BITCOIN_VERSION=abelian
+BITCOIN_VERSION=liboqs
 
 bitcoin_clone:
 	if [ ! -d "bitcoin-$(BITCOIN_VERSION)" ]; then git clone https://github.com/kozyilmaz/bitcoin.git bitcoin-$(BITCOIN_VERSION); cd bitcoin-$(BITCOIN_VERSION); git checkout $(BITCOIN_VERSION); cd ..; fi;
