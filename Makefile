@@ -38,6 +38,7 @@ subdir-${DEPENDS_ENABLE_UNIVALUE} += \
 	univalue
 
 subdir-${DEPENDS_ENABLE_BITCOIN} += \
+	bdb \
 	boost \
 	bitcoin
 
@@ -45,6 +46,7 @@ bitcoin_depends-y = \
 	openssl \
 	libevent \
 	univalue \
+	bdb \
 	boost \
 	liboqs
 
