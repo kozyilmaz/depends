@@ -10,7 +10,7 @@ bitcoin_clone:
 
 bitcoin_config:
 #	$(call patchme,bitcoin-$(BITCOIN_VERSION))
-	( cd bitcoin-$(BITCOIN_VERSION) && ./autogen.sh; \
+	( cd bitcoin-$(BITCOIN_VERSION) && ./autogen.sh -i -v -f; \
 		CC=${BSPCC} \
 		CXX=${BSPCXX} \
 		CFLAGS="${BSPCFLAGS} ${BSPEXTRAFLAGS} -I${BSPROOTFS}/include" \
@@ -22,7 +22,8 @@ bitcoin_config:
 		--with-pic --disable-shared --enable-static \
 		--disable-tests --disable-bench --disable-man \
 		--disable-asm --disable-zmq --without-miniupnpc \
-		--disable-wallet --without-gui --with-daemon \
+		--enable-wallet --with-incompatible-bdb \
+		--without-gui --with-daemon \
 		--with-utils --with-libs \
 		--with-boost=${BSPROOTFS} \
 		--with-system-univalue \
@@ -32,6 +33,7 @@ bitcoin_config:
 		EVENT_CFLAGS="-I${BSPROOTFS}/include" EVENT_LIBS="-L${BSPROOTFS}/lib -levent" \
 		EVENT_PTHREADS_CFLAGS="-I${BSPROOTFS}/include" EVENT_PTHREADS_LIBS="-L${BSPROOTFS}/lib -levent_pthreads" \
 		UNIVALUE_CFLAGS="-I${BSPROOTFS}/include" UNIVALUE_LIBS="-L${BSPROOTFS}/lib -lunivalue" \
+		BDB_CFLAGS="-I${BSPROOTFS}/include" BDB_LIBS="-L${BSPROOTFS}/lib -ldb_cxx" \
 	)
 
 bitcoin_build:
