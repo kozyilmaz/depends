@@ -5,11 +5,13 @@ Cross-platform dependency compiler for Linux, macOS and iOS (`x86_64` and `ios64
 ```
 # add
 $ git remote add depends https://github.com/kozyilmaz/depends.git
-$ git subtree add --prefix=depends/ depends master
-
+$ git subtree add --prefix=depends/ --squash depends master
+# check
+$ git fetch https://github.com/kozyilmaz/depends.git master
+$ ./depends/tools/contrib/devtools/git-subtree-check.sh depends
 # sync
-$ git remote add depends-remote https://github.com/kozyilmaz/depends.git
-$ git subtree pull --prefix=depends/ depends-remote master
+$ git remote add depends-remote https://github.com/kozyilmaz/depends.git
+$ git subtree pull --prefix=depends/ --squash depends-remote master
 ```
 
 ## Linux and macOS
