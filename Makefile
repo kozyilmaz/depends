@@ -49,6 +49,15 @@ syscheck:
 	@git fetch https://github.com/kozyilmaz/tools.git master
 	@$(TOPDIR)/tools/contrib/devtools/git-subtree-check.sh tools
 
+sysupdate:
+	@echo "  SYSUPDATE  tools"
+ifeq ($(shell git remote -v |grep '\<tools-remote\>'),)
+	@git remote add tools-remote https://github.com/kozyilmaz/tools.git
+else
+	@git remote set-url tools-remote https://github.com/kozyilmaz/tools.git
+endif
+	@git subtree pull --prefix=tools/ --squash tools-remote master
+
 clone:
 	@true
 
