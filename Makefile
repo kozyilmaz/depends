@@ -3,8 +3,16 @@ ifeq ($(BSPROOT),)
     $(error You must first run 'source environment')
 endif
 
-subdir-y += \
-	tools
+GOALS := clean distclean
+ifeq ($(filter $(GOALS),$(MAKECMDGOALS)),)
+# check if 'tools' is already built, if not, add to subdir
+ifeq ($(shell if [ -e $(BSPTOOLS)/version.txt ]; then cat $(BSPTOOLS)/version.txt | cut -d '-' -f 1; fi),)
+subdir-y += tools
+endif
+else
+# add tools for 'clean' and 'distclean' anyway
+subdir-y += tools
+endif
 
 subdir-${DEPENDS_ENABLE_OPENSSL} += \
 	openssl
