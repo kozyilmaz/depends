@@ -126,7 +126,7 @@ bitcoin_uninstall:
 	if [ -d "${BSPROOTFS}/include/bitcoin" ]; then rm -rf ${BSPROOTFS}/include/bitcoin; fi
 
 bitcoin_clean:
-	if [ -f "bitcoin-$(BITCOIN_VERSION)/Makefile" ]; then make -C bitcoin-$(BITCOIN_VERSION) clean; fi
+	rm -rf bitcoin-$(BITCOIN_VERSION)
 
 bitcoin_distclean:
 	rm -rf bitcoin-$(BITCOIN_VERSION)
