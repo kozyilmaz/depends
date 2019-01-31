@@ -3,8 +3,8 @@ ifeq ($(BSPROOT),)
     $(error You must first run 'source environment')
 endif
 
-GOALS := clean distclean
-ifeq ($(filter $(GOALS),$(MAKECMDGOALS)),)
+TOOLSGOALS := clean distclean
+ifeq ($(filter $(TOOLSGOALS),$(MAKECMDGOALS)),)
 # check if 'tools' is already built, if not, add to subdir
 ifeq ($(shell if [ -e $(BSPTOOLS)/version.txt ]; then cat $(BSPTOOLS)/version.txt | cut -d '-' -f 1; fi),)
 subdir-y += tools
