@@ -33,7 +33,7 @@ univalue_uninstall:
 	make -C univalue-$(UNIVALUE_VERSION) uninstall
 
 univalue_clean:
-	if [ -f "univalue-$(UNIVALUE_VERSION)/Makefile" ]; then make -C univalue-$(UNIVALUE_VERSION) clean; fi
+	rm -rf univalue-$(UNIVALUE_VERSION)
 
 univalue_distclean:
 	rm -rf univalue-$(UNIVALUE_VERSION)

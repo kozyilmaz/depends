@@ -36,7 +36,7 @@ libevhtp_uninstall:
 	if [ -f "${BSPROOTFS}/lib/pkgconfig/evhtp.pc" ]; then rm -rf ${BSPROOTFS}/lib/pkgconfig/evhtp.pc; fi
 
 libevhtp_clean:
-	if [ -f "libevhtp-$(LIBEVHTP_VERSION)/Makefile" ]; then make -C libevhtp-$(LIBEVHTP_VERSION) clean; fi
+	rm -rf libevhtp-$(LIBEVHTP_VERSION)
 
 libevhtp_distclean:
 	rm -rf libevhtp-$(LIBEVHTP_VERSION)
