@@ -48,10 +48,7 @@ boost_uninstall:
 	rm -rf ${BSPROOTFS}/lib/libboost_*
 
 boost_clean:
-	if [ -f "boost_$(BOOST_VERSION)/Makefile" ]; then make -C boost_$(BOOST_VERSION) distclean; fi
-	if [ -f "boost_$(BOOST_VERSION)/tools/build/src/user-config.jam" ]; then \
-		rm -rf boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
-	fi
+	rm -rf boost_$(BOOST_VERSION)
 
 boost_distclean:
 	rm -rf boost_$(BOOST_VERSION)

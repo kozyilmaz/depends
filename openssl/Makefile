@@ -38,7 +38,7 @@ openssl_uninstall:
 	make -C openssl-$(OPENSSL_VERSION) uninstall_sw
 
 openssl_clean:
-	if [ -f "openssl-$(OPENSSL_VERSION)/Makefile" ]; then make -C openssl-$(OPENSSL_VERSION) distclean; fi
+	rm -rf openssl-$(OPENSSL_VERSION)
 
 openssl_distclean:
 	rm -rf openssl-$(OPENSSL_VERSION)

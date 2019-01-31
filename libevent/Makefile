@@ -34,7 +34,7 @@ libevent_uninstall:
 	make -C libevent-$(LIBEVENT_VERSION) uninstall
 
 libevent_clean:
-	if [ -f "libevent-$(LIBEVENT_VERSION)/Makefile" ]; then make -C libevent-$(LIBEVENT_VERSION) distclean; fi
+	rm -rf libevent-$(LIBEVENT_VERSION)
 
 libevent_distclean:
 	rm -rf libevent-$(LIBEVENT_VERSION)

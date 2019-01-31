@@ -47,7 +47,7 @@ curl_uninstall:
 	make -C curl-$(CURL_VERSION) uninstall
 
 curl_clean:
-	if [ -f "curl-$(CURL_VERSION)/Makefile" ]; then make -C curl-$(CURL_VERSION) distclean; fi
+	rm -rf curl-$(CURL_VERSION)
 
 curl_distclean:
 	rm -rf curl-$(CURL_VERSION)
