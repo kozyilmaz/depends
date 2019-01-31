@@ -1,0 +1,65 @@
+diff --git a/src/key.cpp b/src/key.cpp
+index df452cd33..d1084726f 100644
+--- a/src/key.cpp
++++ b/src/key.cpp
+@@ -13,8 +13,15 @@
+ #include <secp256k1.h>
+ #include <secp256k1_recovery.h>
+ 
++extern "C" {
++#include <oqs/oqs.h>
++}
++
++
+ static secp256k1_context* secp256k1_context_sign = nullptr;
+ 
++static OQS_SIG *oqs_context_sign = NULL;
++
+ /** These functions are taken from the libsecp256k1 distribution and are very ugly. */
+ 
+ /**
+@@ -341,6 +348,7 @@ bool ECC_InitSanityCheck() {
+ }
+ 
+ void ECC_Start() {
++#if 0
+     assert(secp256k1_context_sign == nullptr);
+ 
+     secp256k1_context *ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
+@@ -355,13 +363,36 @@ void ECC_Start() {
+     }
+ 
+     secp256k1_context_sign = ctx;
++
++#else
++    // liboqs using Tesla I
++    assert(oqs_context_sign == NULL);
++
++	// Use system RNG in this program (can be )
++	OQS_randombytes_switch_algorithm(OQS_RAND_alg_system);
++	//OQS_randombytes_switch_algorithm(OQS_RAND_alg_openssl);
++    
++	OQS_SIG *ctx = OQS_SIG_new(OQS_SIG_alg_qTESLA_I);
++    assert(ctx != NULL);
++    oqs_context_sign = ctx;
++
++#endif
+ }
+ 
+ void ECC_Stop() {
++#if 0
+     secp256k1_context *ctx = secp256k1_context_sign;
+     secp256k1_context_sign = nullptr;
+ 
+     if (ctx) {
+         secp256k1_context_destroy(ctx);
+     }
++#else
++    // liboqs using Tesla I
++    OQS_SIG *ctx = oqs_context_sign;
++    oqs_context_sign = NULL;
++    if (ctx) {
++        OQS_SIG_free(ctx);
++    }
++#endif
+ }
