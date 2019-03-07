@@ -21,12 +21,16 @@ ANDROIDREGEX="^(android)"
 if [[ "$ARG" =~ $ANDROIDREGEX ]]; then
     echo "checking env vars for Android";
     if [[ -z "$ANDROID_NDK" ]]; then
-        echo "ANDROID_NDK not defined!"
+        echo "ANDROID_NDK not defined!";
         return 1
+    else
+        echo "using ANDROID_NDK=$ANDROID_NDK";
     fi
     if [[ -z "$ANDROID_HOST_TAG" ]]; then
-        echo "ANDROID_HOST_TAG not defined!"
+        echo "ANDROID_HOST_TAG not defined!";
         return 1
+    else
+        echo "using ANDROID_HOST_TAG=$ANDROID_HOST_TAG";
     fi
 fi
 
