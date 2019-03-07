@@ -64,7 +64,7 @@ elif [ "android-aarch64" == "$ARG" ]; then
 # export ANDROID definitions and paths
 #    export ANDROID_NDK=/usr/local/android-ndk-r19b
 #    export ANDROID_HOST_TAG=darwin-x86_64
-    export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_NDK}/bin:$PATH
+    export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH
     BSPCC=aarch64-linux-android21-clang
     BSPCXX=aarch64-linux-android21-clang++
     BSPHOST="--host aarch64-linux-android"
