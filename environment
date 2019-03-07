@@ -16,8 +16,9 @@ else
     return 1
 fi
 
+ANDROIDREGEX="^(android)"
 # check Android env vars
-if [ "android-*" == "$ARG" ]; then
+if [[ "$ARG" =~ $ANDROIDREGEX ]]; then
     echo "checking env vars for Android";
     if [[ -z "$ANDROID_NDK" ]]; then
         echo "ANDROID_NDK not defined!"
