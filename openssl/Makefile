@@ -14,6 +14,8 @@ else ifeq ($(TARGET_PLATFORM),IOS64)
 OPENSSL_PLT = ios64-xcrun
 else ifeq ($(TARGET_PLATFORM),IOSSIM)
 OPENSSL_PLT = iossimulator-xcrun
+else ifeq ($(TARGET_PLATFORM),ANDROID-AARCH64)
+OPENSSL_PLT = android-arm64 -D__ANDROID_API__=21
 endif
 
 openssl_clone:
