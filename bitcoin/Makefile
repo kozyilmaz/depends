@@ -5,6 +5,10 @@ include ../Makefile.build
 
 BITCOIN_VERSION=0.17.1
 
+ifeq      ($(TARGET_PLATFORM),ANDROID-AARCH64)
+CUSTOM_CONFIG_OPTS  = ac_cv_c_bigendian=no
+endif
+
 bitcoin_clone:
 	if [ ! -f "bitcoin-$(BITCOIN_VERSION).tar.gz" ]; then curl -OL https://bitcoincore.org/bin/bitcoin-core-$(BITCOIN_VERSION)/bitcoin-$(BITCOIN_VERSION).tar.gz; fi
 	if [ ! -d "bitcoin-$(BITCOIN_VERSION)" ]; then tar xvf bitcoin-$(BITCOIN_VERSION).tar.gz; fi
@@ -20,6 +24,7 @@ bitcoin_config:
 		LDFLAGS="${BSPLDFLAGS} ${BSPEXTRAFLAGS} -L${BSPROOTFS}/lib" \
 		PKG_CONFIG_PATH=${BSPROOTFS}/lib/pkgconfig \
 		./configure ${BSPHOST} --prefix=${BSPROOTFS} \
+		${CUSTOM_CONFIG_OPTS} \
 		--with-pic --disable-shared --enable-static \
 		--disable-tests --disable-bench --disable-man \
 		--disable-asm --disable-zmq --without-miniupnpc \
