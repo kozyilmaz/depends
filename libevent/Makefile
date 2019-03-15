@@ -10,7 +10,8 @@ libevent_clone:
 	if [ ! -d "libevent-$(LIBEVENT_VERSION)" ]; then tar xvf libevent-$(LIBEVENT_VERSION).tar.gz; fi
 
 libevent_config:
-	( cd libevent-$(LIBEVENT_VERSION); \
+	$(call patchme,libevent-$(LIBEVENT_VERSION))
+	( cd libevent-$(LIBEVENT_VERSION) && LIBTOOLIZE=glibtoolize ./autogen.sh; \
 		CC=${BSPCC} \
 		CXX=${BSPCXX} \
 		CFLAGS="${BSPCFLAGS} ${BSPEXTRAFLAGS} -I${BSPROOTFS}/include" \
