@@ -34,7 +34,7 @@ if [[ "$ARG" =~ $ANDROIDREGEX ]]; then
     echo "using ANDROID_NDK=$ANDROID_NDK";
     echo "using ANDROID_HOST_TAG=$ANDROID_HOST_TAG";
     #export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH
-    echo "export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$PATH"
+    echo "export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:\$PATH"
 fi
 
 # common
