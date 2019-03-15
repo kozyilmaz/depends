@@ -1,0 +1,51 @@
+diff --git a/configure.ac b/configure.ac
+index 7528d37..b3db7ac 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -342,6 +342,7 @@ AC_CHECK_FUNCS([ \
+   accept4 \
+   arc4random \
+   arc4random_buf \
++  arc4random_addrandom \
+   eventfd \
+   epoll_create1 \
+   fcntl \
+diff --git a/evutil_rand.c b/evutil_rand.c
+index 046a14b..4be0b1c 100644
+--- a/evutil_rand.c
++++ b/evutil_rand.c
+@@ -192,12 +192,14 @@ evutil_secure_rng_get_bytes(void *buf, size_t n)
+ 	ev_arc4random_buf(buf, n);
+ }
+ 
++#if !defined(EVENT__HAVE_ARC4RANDOM) || defined(EVENT__HAVE_ARC4RANDOM_ADDRANDOM)
+ void
+ evutil_secure_rng_add_bytes(const char *buf, size_t n)
+ {
+ 	arc4random_addrandom((unsigned char*)buf,
+ 	    n>(size_t)INT_MAX ? INT_MAX : (int)n);
+ }
++#endif
+ 
+ void
+ evutil_free_secure_rng_globals_(void)
+diff --git a/include/event2/util.h b/include/event2/util.h
+index dd4bbb6..c4af2bd 100644
+--- a/include/event2/util.h
++++ b/include/event2/util.h
+@@ -842,6 +842,7 @@ int evutil_secure_rng_init(void);
+ EVENT2_EXPORT_SYMBOL
+ int evutil_secure_rng_set_urandom_device_file(char *fname);
+ 
++#ifdef EVENT__HAVE_ARC4RANDOM_ADDRANDOM
+ /** Seed the random number generator with extra random bytes.
+ 
+     You should almost never need to call this function; it should be
+@@ -858,6 +859,7 @@ int evutil_secure_rng_set_urandom_device_file(char *fname);
+  */
+ EVENT2_EXPORT_SYMBOL
+ void evutil_secure_rng_add_bytes(const char *dat, size_t datlen);
++#endif
+ 
+ #ifdef __cplusplus
+ }
