@@ -4,7 +4,7 @@ target_name ?= boost
 include ../Makefile.build
 
 BOOST_MAJOR=1
-BOOST_MINOR=66
+BOOST_MINOR=69
 BOOST_MICRO=0
 
 BOOST_VERSION=$(BOOST_MAJOR)_$(BOOST_MINOR)_$(BOOST_MICRO)
@@ -15,6 +15,8 @@ else ifeq ($(TARGET_PLATFORM),IOS64)
 BOOST_TOOLSET = darwin
 else ifeq ($(TARGET_PLATFORM),IOSSIM)
 BOOST_TOOLSET = darwin
+else ifeq ($(TARGET_PLATFORM),ANDROID-AARCH64)
+BOOST_TOOLSET = clang
 else
 BOOST_TOOLSET = gcc
 endif
@@ -27,7 +29,11 @@ boost_config:
 	if [ -f "boost_$(BOOST_VERSION)/tools/build/src/user-config.jam" ]; then \
 		rm -rf boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
 	fi
+ifeq ($(TARGET_PLATFORM),ANDROID-AARCH64)
+	echo "import os ; using clang : android : ${BSPCXX} ${BSPCFLAGS} : <archiver>aarch64-linux-android-ar <ranlib>aarch64-linux-android-ranlib ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
+else
 	echo "using $(BOOST_TOOLSET) : custom : ${BSPCXX} ${BSPCFLAGS} ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
+endif
 	( cd boost_$(BOOST_VERSION); \
 		./bootstrap.sh --prefix=${BSPROOTFS} --without-icu --with-libraries=chrono,filesystem,system,thread,test \
 	)
