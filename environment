@@ -46,6 +46,7 @@ if [[ -z "$ARG" ]]; then
     BSPCC=gcc
     BSPCXX=g++
     BSPHOST=
+    BSPPREFIX=
     BSPCFLAGS=
     BSPLDFLAGS=
     BSPPLATFORM=x86_64
@@ -53,6 +54,7 @@ elif [ "ios64" == "$ARG" ]; then
     BSPCC=$(xcrun --sdk iphoneos -f clang)
     BSPCXX=$(xcrun --sdk iphoneos -f clang++)
     BSPHOST="--host=aarch64-apple-darwin"
+    BSPPREFIX=
     BSPCFLAGS="-arch arm64 -miphoneos-version-min=12.1 -isysroot $(xcrun --sdk iphoneos --show-sdk-path) -fno-common"
     BSPLDFLAGS=
     BSPPLATFORM=ios64
@@ -60,6 +62,7 @@ elif [ "iossim" == "$ARG" ]; then
     BSPCC=$(xcrun --sdk iphonesimulator -f clang)
     BSPCXX=$(xcrun --sdk iphonesimulator -f clang++)
     BSPHOST="--host=x86_64-apple-darwin"
+    BSPPREFIX=
     BSPCFLAGS="-arch x86_64 -miphonesimulator-version-min=12.1 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
     BSPLDFLAGS=
     BSPPLATFORM=iossim
@@ -67,6 +70,7 @@ elif [ "android-aarch64" == "$ARG" ]; then
     BSPCC=aarch64-linux-android21-clang
     BSPCXX=aarch64-linux-android21-clang++
     BSPHOST="--host aarch64-linux-android"
+    BSPPREFIX=aarch64-linux-android
     BSPCFLAGS=
     BSPLDFLAGS=
     BSPPLATFORM=android-aarch64
@@ -80,7 +84,7 @@ BSPTOOLS=${BSPROOT}/tools/o
 BSPROOTFS=${BSPROOT}/build/${BSPPLATFORM}
 PATH=${BSPTOOLS}/bin:${PATH}
 
-export BSPJOB BSPROOT BSPCC BSPCXX BSPHOST BSPCFLAGS BSPLDFLAGS BSPPLATFORM BSPEXTRAFLAGS BSPTOOLS BSPROOTFS PATH
+export BSPJOB BSPROOT BSPCC BSPCXX BSPHOST BSPPREFIX BSPCFLAGS BSPLDFLAGS BSPPLATFORM BSPEXTRAFLAGS BSPTOOLS BSPROOTFS PATH
 
 
 # export var for Makefile.build and other Makefile's
