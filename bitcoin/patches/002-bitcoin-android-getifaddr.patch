@@ -1,0 +1,38 @@
+From 9256f7d13f5b68ebc2981e8f45777f4bdc43f1b3 Mon Sep 17 00:00:00 2001
+From: Cory Fields <cory-nospam-@coryfields.com>
+Date: Thu, 19 Jul 2018 14:21:05 -0400
+Subject: [PATCH] build: avoid getifaddrs when unavailable
+
+---
+ configure.ac | 4 ++++
+ src/net.cpp  | 2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4275796b504..bbf5f642a75 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -727,6 +727,10 @@ fi
+ 
+ AC_CHECK_HEADERS([endian.h sys/endian.h byteswap.h stdio.h stdlib.h unistd.h strings.h sys/types.h sys/stat.h sys/select.h sys/prctl.h])
+ 
++AC_CHECK_DECLS([getifaddrs, freeifaddrs],,,
++    [#include <sys/types.h>
++    #include <ifaddrs.h>]
++)
+ AC_CHECK_DECLS([strnlen])
+ 
+ # Check for daemon(3), unrelated to --with-daemon (although used by it)
+diff --git a/src/net.cpp b/src/net.cpp
+index ad9c5e1d817..b3a991b707f 100644
+--- a/src/net.cpp
++++ b/src/net.cpp
+@@ -2167,7 +2167,7 @@ void Discover()
+             }
+         }
+     }
+-#else
++#elif (HAVE_DECL_GETIFADDRS && HAVE_DECL_FREEIFADDRS)
+     // Get local host ip
+     struct ifaddrs* myaddrs;
+     if (getifaddrs(&myaddrs) == 0)
