@@ -17,6 +17,9 @@ endif
 subdir-${DEPENDS_ENABLE_OPENSSL} += \
 	openssl
 
+openssl_depends-y = \
+	tools-built
+
 subdir-${DEPENDS_ENABLE_CURL} += \
 	curl
 
@@ -51,6 +54,19 @@ bitcoin_depends-y = \
 
 
 include Makefile.lib
+
+tools-built:
+ifeq ($(shell if [ -e $(BSPTOOLS)/version.txt ]; then cat $(BSPTOOLS)/version.txt | cut -d '-' -f 1; fi),)
+	@echo "  FAIL       tools"
+	@false
+else
+	@echo "  SUCCESS    tools"
+ifeq ($(BSPPLATFORM),android-aarch64)
+	$(shell export PATH="${PATH}":${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin)
+	@echo "  PATH       ${PATH}"
+endif
+	@true
+endif
 
 syscheck:
 	@echo "  SYSCHECK   tools"
