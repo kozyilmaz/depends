@@ -9,16 +9,20 @@ BOOST_MICRO=0
 
 BOOST_VERSION=$(BOOST_MAJOR)_$(BOOST_MINOR)_$(BOOST_MICRO)
 
-ifeq      ($(TARGET_PLATFORM),MACOS)
+ifeq      (${BSPPLATFORM},ios-arm64)
 BOOST_TOOLSET = darwin
-else ifeq ($(TARGET_PLATFORM),IOS64)
+else ifeq (${BSPPLATFORM},ios-sim)
 BOOST_TOOLSET = darwin
-else ifeq ($(TARGET_PLATFORM),IOSSIM)
-BOOST_TOOLSET = darwin
-else ifeq ($(TARGET_PLATFORM),ANDROID-AARCH64)
+else ifeq (${BSPPLATFORM},android-aarch64)
 BOOST_TOOLSET = clang
-else
+else ifeq (${BSPPLATFORM},x64_64)
+# native
+ifeq      ($(HOST_PLATFORM),WINDOWS)
+else ifeq ($(HOST_PLATFORM),MACOS)
+BOOST_TOOLSET = darwin
+else ifeq ($(HOST_PLATFORM),LINUX)
 BOOST_TOOLSET = gcc
+endif
 endif
 
 boost_clone:
@@ -29,7 +33,7 @@ boost_config:
 	if [ -f "boost_$(BOOST_VERSION)/tools/build/src/user-config.jam" ]; then \
 		rm -rf boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
 	fi
-ifeq ($(TARGET_PLATFORM),ANDROID-AARCH64)
+ifeq (${BSPPLATFORM},android-aarch64)
 	echo "import os ; using clang : android : ${BSPCXX} ${BSPCFLAGS} : <archiver>aarch64-linux-android-ar <ranlib>aarch64-linux-android-ranlib ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
 else
 	echo "using $(BOOST_TOOLSET) : custom : ${BSPCXX} ${BSPCFLAGS} ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
