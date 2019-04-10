@@ -33,6 +33,8 @@ if [[ "$ARG" =~ $ANDROIDREGEX ]]; then
     # export ANDROID_HOST_TAG=darwin-x86_64
     echo "using ANDROID_NDK=$ANDROID_NDK";
     echo "using ANDROID_HOST_TAG=$ANDROID_HOST_TAG";
+    export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:${PATH};
+    echo "using PATH=${PATH}";
 fi
 
 # common
