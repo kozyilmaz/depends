@@ -29,8 +29,8 @@ subdir-${DEPENDS_ENABLE_LIBEVENT} += \
 libevent_depends-y = \
 	openssl
 
-#subdir-${DEPENDS_ENABLE_LIBEVHTP} += \
-#	libevhtp
+subdir-${DEPENDS_ENABLE_LIBEVHTP} += \
+	libevhtp
 
 libevhtp_depends-y = \
 	openssl \
