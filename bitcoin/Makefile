@@ -5,8 +5,8 @@ include ../Makefile.build
 
 BITCOIN_VERSION=0.17.1
 
-ifeq      ($(TARGET_PLATFORM),ANDROID-AARCH64)
-CUSTOM_CONFIG_OPTS  = ac_cv_c_bigendian=no
+ifeq      (${BSPPLATFORM},android-aarch64)
+CUSTOM_CONFIG_OPTS = ac_cv_c_bigendian=no
 endif
 
 bitcoin_clone:
