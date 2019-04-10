@@ -3,19 +3,22 @@ target_name ?= openssl
 
 include ../Makefile.build
 
-OPENSSL_VERSION=1.1.1a
+OPENSSL_VERSION=1.1.1b
 
-ifeq      ($(TARGET_PLATFORM),WINDOWS)
-else ifeq ($(TARGET_PLATFORM),MACOS)
-OPENSSL_PLT = darwin64-x86_64-cc
-else ifeq ($(TARGET_PLATFORM),LINUX)
-OPENSSL_PLT = linux-x86_64
-else ifeq ($(TARGET_PLATFORM),IOS64)
+ifeq      (${BSPPLATFORM},ios-arm64)
 OPENSSL_PLT = ios64-xcrun
-else ifeq ($(TARGET_PLATFORM),IOSSIM)
+else ifeq (${BSPPLATFORM},ios-sim)
 OPENSSL_PLT = iossimulator-xcrun
-else ifeq ($(TARGET_PLATFORM),ANDROID-AARCH64)
+else ifeq (${BSPPLATFORM},android-aarch64)
 OPENSSL_PLT = android-arm64 -D__ANDROID_API__=21
+else ifeq (${BSPPLATFORM},x64_64)
+# native
+ifeq      ($(HOST_PLATFORM),WINDOWS)
+else ifeq ($(HOST_PLATFORM),MACOS)
+OPENSSL_PLT = darwin64-x86_64-cc
+else ifeq ($(HOST_PLATFORM),LINUX)
+OPENSSL_PLT = linux-x86_64
+endif
 endif
 
 openssl_clone:
@@ -27,7 +30,12 @@ openssl_config:
 	( cd openssl-$(OPENSSL_VERSION); \
 		CFLAGS="" CXXFLAGS="" LDFLAGS="" \
 		./Configure $(OPENSSL_PLT) ${BSPEXTRAFLAGS} --prefix=${BSPROOTFS} \
-		no-asm no-shared no-zlib no-zlib-dynamic no-comp no-ssl no-dtls no-tls1 no-tls1_1 no-weak-ssl-ciphers no-hw no-dso no-engine \
+		no-asm no-shared  \
+		no-comp no-hw no-dso no-engine \
+		no-ssl no-dtls \
+		no-tls1 no-tls1_1 \
+		no-weak-ssl-ciphers \
+		no-zlib no-zlib-dynamic \
 	)
 
 openssl_build:

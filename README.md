@@ -25,7 +25,7 @@ Output directory will be `$PROJECT_DIR/rootfs/x86_64`
 
 ## iOS
 ```sh
-$ source environment ios64
+$ source environment ios-arm64
 $ make all
 # for debugging
 $ PRINT_DEBUG=y make all
@@ -34,7 +34,7 @@ Output directory will be `$PROJECT_DIR/rootfs/ios64`
 
 ## iOS Simulator
 ```sh
-$ source environment iossim
+$ source environment ios-sim
 $ make all
 # for debugging
 $ PRINT_DEBUG=y make all
