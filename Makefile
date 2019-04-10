@@ -62,8 +62,8 @@ ifeq ($(shell if [ -e $(BSPTOOLS)/version.txt ]; then cat $(BSPTOOLS)/version.tx
 else
 	@echo "  SUCCESS    tools"
 ifeq ($(BSPPLATFORM),android-aarch64)
-	$(shell export PATH="${PATH}":${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin)
-	@echo "  PATH       ${PATH}"
+	$(eval export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/${ANDROID_HOST_TAG}/bin:$(PATH))
+	@echo "  PATH       $(PATH)"
 endif
 	@true
 endif
