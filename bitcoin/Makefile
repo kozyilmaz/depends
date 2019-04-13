@@ -5,7 +5,7 @@ include ../Makefile.build
 
 BITCOIN_VERSION=0.17.1
 
-ifeq      (${BSPPLATFORM},android-aarch64)
+ifeq      (${BSPPLATFORM},android-arm64-v8a)
 CUSTOM_CONFIG_OPTS = ac_cv_c_bigendian=no
 endif
 

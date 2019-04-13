@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# usage: source environment [optional: ios-arm64, ios-sim, android-aarch64]
+# usage: source environment [optional: ios-arm64, ios-sim, android-arm64-v8a, android-armeabi-v7a]
 ARG=$1
 
 if [[ -z "$ARG" ]]; then
@@ -9,8 +9,10 @@ elif [ "ios-arm64" == "$ARG" ]; then
     echo "setting compiler for Apple iOS (only 64bit)";
 elif [ "ios-sim" == "$ARG" ]; then
     echo "setting compiler for Apple iOS Simulator";
-elif [ "android-aarch64" == "$ARG" ]; then
+elif [ "android-arm64-v8a" == "$ARG" ]; then
     echo "setting compiler for Android arm64-v8a";
+elif [ "android-armeabi-v7a" == "$ARG" ]; then
+    echo "setting compiler for Android armeabi-v7a";
 else
     echo "no suitable platform found!"
     return 1
@@ -66,14 +68,22 @@ elif [ "ios-sim" == "$ARG" ]; then
     BSPCFLAGS="-arch x86_64 -miphonesimulator-version-min=12.1 -isysroot $(xcrun --sdk iphonesimulator --show-sdk-path)"
     BSPLDFLAGS=
     BSPPLATFORM=ios-sim
-elif [ "android-aarch64" == "$ARG" ]; then
+elif [ "android-arm64-v8a" == "$ARG" ]; then
     BSPCC=aarch64-linux-android21-clang
     BSPCXX=aarch64-linux-android21-clang++
     BSPHOST="--host aarch64-linux-android"
     BSPPREFIX=aarch64-linux-android
     BSPCFLAGS=
     BSPLDFLAGS=
-    BSPPLATFORM=android-aarch64
+    BSPPLATFORM=android-arm64-v8a
+elif [ "android-armeabi-v7a" == "$ARG" ]; then
+    BSPCC=armv7a-linux-androideabi21-clang
+    BSPCXX=armv7a-linux-androideabi21-clang++
+    BSPHOST="--host arm-linux-androideabi"
+    BSPPREFIX=arm-linux-androideabi
+    BSPCFLAGS=
+    BSPLDFLAGS=
+    BSPPLATFORM=android-armeabi-v7a
 fi
 
 # debugging & profiling

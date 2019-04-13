@@ -30,7 +30,7 @@ $ make all
 # for debugging
 $ PRINT_DEBUG=y make all
 ```
-Output directory will be `$PROJECT_DIR/rootfs/ios64`
+Output directory will be `$PROJECT_DIR/rootfs/ios-arm64`
 
 ## iOS Simulator
 ```sh
@@ -39,17 +39,17 @@ $ make all
 # for debugging
 $ PRINT_DEBUG=y make all
 ```
-Output directory will be `$PROJECT_DIR/rootfs/iossim`
+Output directory will be `$PROJECT_DIR/rootfs/ios-sim`
 
-## Android aarch64 (arm64-v8a)
+## Android (arm64-v8a, armeabi-v7a)
 Please refer to [Android NDK README](https://developer.android.com/ndk/guides/other_build_systems) for `$NDK` and `$HOST_TAG` variables
 ```sh
 $ export ANDROID_NDK=$PATH_TO_NDK
 $ export ANDROID_HOST_TAG=$HOST_TAG
-$ source environment android-aarch64
+$ source environment android-$ANDROID_ABI
 $ make all
 # for debugging
 $ PRINT_DEBUG=y make all
 ```
-Output directory will be `$PROJECT_DIR/rootfs/android-aarch64`
+Output directory will be `$PROJECT_DIR/rootfs/android-$ANDROID_ABI`
 

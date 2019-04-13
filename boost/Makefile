@@ -9,19 +9,21 @@ BOOST_MICRO=0
 
 BOOST_VERSION=$(BOOST_MAJOR)_$(BOOST_MINOR)_$(BOOST_MICRO)
 
-ifeq      (${BSPPLATFORM},ios-arm64)
+# iOS
+ifneq ($(findstring ios, $(BSPPLATFORM)),)
 BOOST_TOOLSET = darwin
-else ifeq (${BSPPLATFORM},ios-sim)
-BOOST_TOOLSET = darwin
-else ifeq (${BSPPLATFORM},android-aarch64)
+else
+# Android
+ifneq ($(findstring android, $(BSPPLATFORM)),)
 BOOST_TOOLSET = clang
-else ifeq (${BSPPLATFORM},x64_64)
-# native
+else
+# Native
 ifeq      ($(HOST_PLATFORM),WINDOWS)
 else ifeq ($(HOST_PLATFORM),MACOS)
 BOOST_TOOLSET = darwin
 else ifeq ($(HOST_PLATFORM),LINUX)
 BOOST_TOOLSET = gcc
+endif
 endif
 endif
 
@@ -33,8 +35,8 @@ boost_config:
 	if [ -f "boost_$(BOOST_VERSION)/tools/build/src/user-config.jam" ]; then \
 		rm -rf boost_$(BOOST_VERSION)/tools/build/src/user-config.jam; \
 	fi
-ifeq (${BSPPLATFORM},android-aarch64)
-	echo "import os ; using clang : android : ${BSPCXX} ${BSPCFLAGS} : <archiver>aarch64-linux-android-ar <ranlib>aarch64-linux-android-ranlib ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
+ifneq ($(findstring android, $(BSPPLATFORM)),)
+	echo "import os ; using $(BOOST_TOOLSET) : android : ${BSPCXX} ${BSPCFLAGS} : <archiver>${BSPPREFIX}-ar <ranlib>${BSPPREFIX}-ranlib ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
 else
 	echo "using $(BOOST_TOOLSET) : custom : ${BSPCXX} ${BSPCFLAGS} ; " >> boost_$(BOOST_VERSION)/tools/build/src/user-config.jam
 endif

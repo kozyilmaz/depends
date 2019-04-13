@@ -9,7 +9,7 @@ ifeq      (${BSPPLATFORM},ios-arm64)
 OPENSSL_PLT = ios64-xcrun
 else ifeq (${BSPPLATFORM},ios-sim)
 OPENSSL_PLT = iossimulator-xcrun
-else ifeq (${BSPPLATFORM},android-aarch64)
+else ifeq (${BSPPLATFORM},android-arm64-v8a)
 OPENSSL_PLT = android-arm64 -D__ANDROID_API__=21
 else ifeq (${BSPPLATFORM},x64_64)
 # native
