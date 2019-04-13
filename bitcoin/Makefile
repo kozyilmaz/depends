@@ -9,6 +9,8 @@ ifeq      (${BSPPLATFORM},android-arm64-v8a)
 CUSTOM_CONFIG_OPTS = ac_cv_c_bigendian=no ac_cv_sys_file_offset_bits=64
 else ifeq (${BSPPLATFORM},android-armeabi-v7a)
 CUSTOM_CONFIG_OPTS = ac_cv_c_bigendian=no ac_cv_sys_file_offset_bits=32
+else ifeq (${BSPPLATFORM},android-x86_64)
+CUSTOM_CONFIG_OPTS = ac_cv_c_bigendian=no ac_cv_sys_file_offset_bits=64
 endif
 
 bitcoin_clone:
