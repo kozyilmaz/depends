@@ -13,6 +13,8 @@ elif [ "android-arm64-v8a" == "$ARG" ]; then
     echo "setting compiler for Android arm64-v8a";
 elif [ "android-armeabi-v7a" == "$ARG" ]; then
     echo "setting compiler for Android armeabi-v7a";
+elif [ "android-x86_64" == "$ARG" ]; then
+    echo "setting compiler for Android x86_64";
 else
     echo "no suitable platform found!"
     return 1
@@ -84,6 +86,14 @@ elif [ "android-armeabi-v7a" == "$ARG" ]; then
     BSPCFLAGS=
     BSPLDFLAGS=
     BSPPLATFORM=android-armeabi-v7a
+elif [ "android-x86_64" == "$ARG" ]; then
+    BSPCC=x86_64-linux-android21-clang
+    BSPCXX=x86_64-linux-android21-clang++
+    BSPHOST="--host x86_64-linux-android"
+    BSPPREFIX=x86_64-linux-android
+    BSPCFLAGS=
+    BSPLDFLAGS=
+    BSPPLATFORM=android-x86_64
 fi
 
 # debugging & profiling
