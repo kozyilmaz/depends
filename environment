@@ -16,7 +16,7 @@ elif [ "android-armeabi-v7a" == "$ARG" ]; then
 elif [ "android-x86_64" == "$ARG" ]; then
     echo "setting compiler for Android x86_64";
 else
-    echo "no suitable platform found!"
+    echo "no suitable platform found, options are 'ios-arm64', 'ios-sim', 'android-arm64-v8a', 'android-armeabi-v7a', 'android-x86_64']"
     return 1
 fi
 
