@@ -11,6 +11,8 @@ else ifeq (${BSPPLATFORM},ios-sim)
 OPENSSL_PLT = iossimulator-xcrun
 else ifeq (${BSPPLATFORM},android-arm64-v8a)
 OPENSSL_PLT = android-arm64 -D__ANDROID_API__=21
+else ifeq (${BSPPLATFORM},android-armeabi-v7a)
+OPENSSL_PLT = android-arm -D__ANDROID_API__=21
 else ifeq (${BSPPLATFORM},x64_64)
 # native
 ifeq      ($(HOST_PLATFORM),WINDOWS)
