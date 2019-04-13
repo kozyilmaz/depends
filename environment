@@ -29,7 +29,7 @@ if [[ "$ARG" =~ $ANDROIDREGEX ]]; then
         return 1
     fi
     # sample ANDROID definitions and paths for macOS
-    # export ANDROID_NDK=/usr/local/android-ndk-r19b
+    # export ANDROID_NDK=/usr/local/android-ndk-r19c
     # export ANDROID_HOST_TAG=darwin-x86_64
     echo "using ANDROID_NDK=$ANDROID_NDK";
     echo "using ANDROID_HOST_TAG=$ANDROID_HOST_TAG";
