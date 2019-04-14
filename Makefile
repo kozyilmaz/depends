@@ -52,13 +52,13 @@ bitcoin_depends-y = \
 
 include Makefile.lib
 
-syscheck:
-	@echo "  SYSCHECK   tools"
+tools-check:
+	@echo "  CHECK      tools"
 	@git fetch https://github.com/kozyilmaz/tools.git master
 	@$(TOPDIR)/tools/contrib/devtools/git-subtree-check.sh tools
 
-sysupdate:
-	@echo "  SYSUPDATE  tools"
+tools-update:
+	@echo "  UPDATE     tools"
 ifeq ($(shell git remote -v |grep '\<tools-remote\>'),)
 	@git remote add tools-remote https://github.com/kozyilmaz/tools.git
 else
