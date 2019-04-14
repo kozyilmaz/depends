@@ -75,7 +75,7 @@ elif [ "android-arm64-v8a" == "$ARG" ]; then
     BSPCXX=aarch64-linux-android21-clang++
     BSPHOST="--host aarch64-linux-android"
     BSPPREFIX=aarch64-linux-android
-    BSPCFLAGS=
+    BSPCFLAGS="-fPIC"
     BSPLDFLAGS=
     BSPPLATFORM=android-arm64-v8a
 elif [ "android-armeabi-v7a" == "$ARG" ]; then
@@ -83,7 +83,7 @@ elif [ "android-armeabi-v7a" == "$ARG" ]; then
     BSPCXX=armv7a-linux-androideabi21-clang++
     BSPHOST="--host arm-linux-androideabi"
     BSPPREFIX=arm-linux-androideabi
-    BSPCFLAGS=
+    BSPCFLAGS="-fPIC"
     BSPLDFLAGS=
     BSPPLATFORM=android-armeabi-v7a
 elif [ "android-x86_64" == "$ARG" ]; then
@@ -91,7 +91,7 @@ elif [ "android-x86_64" == "$ARG" ]; then
     BSPCXX=x86_64-linux-android21-clang++
     BSPHOST="--host x86_64-linux-android"
     BSPPREFIX=x86_64-linux-android
-    BSPCFLAGS=
+    BSPCFLAGS="-fPIC"
     BSPLDFLAGS=
     BSPPLATFORM=android-x86_64
 fi
